@@ -1,0 +1,16 @@
+{
+  "strings": {
+    "choppa-name": {
+      "Offset": 0,
+      "Text": "Choppa"
+    },
+    "choppa-description": {
+      "Offset": 0,
+      "Text": "A brutally effective Ork cleaver assembled from scavenged metal, spikes and enthusiasm."
+    },
+    "choppa-flavor": {
+      "Offset": 0,
+      "Text": "If it is heavy, sharp and makes a satisfying noise, it is a proper choppa."
+    }
+  }
+}

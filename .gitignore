@@ -1,0 +1,75 @@
+# Build output
+[Bb]in/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Dd]ist/
+[Oo]ut/
+
+# Unity-generated folders
+[Ll]ibrary/
+[Tt]emp/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+[Mm]emoryCaptures/
+[Rr]ecordings/
+
+# Unity-generated project files
+*.csproj
+*.sln
+*.suo
+*.tmp
+*.user
+*.userprefs
+*.pidb
+*.booproj
+*.svd
+*.pdb
+*.mdb
+*.opendb
+*.VC.db
+*.unityproj
+
+# IDE and editor settings
+.idea/
+.vs/
+.vscode/
+*.sln.iml
+*.code-workspace
+
+# Test and coverage output
+[Tt]est[Rr]esult*/
+[Tt]est[Rr]esults/
+[Cc]overage[Rr]eport*/
+coverage/
+*.coverage
+*.coveragexml
+
+# Package and local tooling artifacts
+packages/
+*.nupkg
+.nuget/
+.dotnet/
+
+# Local game/mod deployment output
+[Dd]eploy/
+[Rr]eleases/
+*.zip
+*.7z
+*.rar
+
+# Logs and crash dumps
+*.log
+*.dmp
+
+# Operating system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Local environment and secrets
+.env
+.env.*
+!.env.example
+*.local
+secrets.json

@@ -45,7 +45,14 @@
       "WeaponAbilities.Ability4.m_FXSettings",
       "WeaponAbilities.Ability4.OnHitOverrideType",
       "WeaponAbilities.Ability4.m_OnHitActions",
-      "WeaponAbilities.Ability4.AP"
+      "WeaponAbilities.Ability4.AP",
+      "WeaponAbilities.Ability5.Type",
+      "WeaponAbilities.Ability5.Mode",
+      "WeaponAbilities.Ability5.m_Ability",
+      "WeaponAbilities.Ability5.m_FXSettings",
+      "WeaponAbilities.Ability5.OnHitOverrideType",
+      "WeaponAbilities.Ability5.m_OnHitActions",
+      "WeaponAbilities.Ability5.AP"
     ],
     "Components": [],
     "Author": "EvgeniyShanhiev",

@@ -18,6 +18,7 @@ namespace ArmouryOrks.Editor
     {
         // Generated assets and the distributable are built from the Unity editor menu.
         internal const string WeaponGuid = "9f1a0cab53be493b96989c9a672d2ae5";
+        internal const string BigChoppaWeaponGuid = "f842bd6192ec4f9d91eb83278470c671";
         internal static readonly string[] WeaponGuids =
         {
             WeaponGuid, "78f71e9a52ab4f8e9a46bd2390860ec2", "ed79a91f997e45c6bd68e154aca4884c",
@@ -50,6 +51,10 @@ namespace ArmouryOrks.Editor
 
         private const string ChargeAbilityPrototype = "c78506dd0e14f7c45a599990e4e65038";
         private const string StrikeAbilityPrototype = "be721a48e3614ddbb86bf18503511c2c";
+        private const string TwoHandedWeaponPrototype = "993996a4c0a24463aa400b9441d4caa8";
+        private const string TwoHandedStrikeAbility = "9dec1bdade284190b0977f5f70d26d3e";
+        private const string TwoHandedCleaveAbility = "163013a18e9c46419b2311454ad2b2c8";
+        private const string PowerAxeFx = "5a72a93ee3bd4a049aa4ddef1e4c7f84";
         private const string MassStunAbilityPrototype = "0db7f73376e14ac6ab3a66b3d71afb90";
         private const string BerserkAbilityPrototype = "ce9c33784314498c9f9fc1f22495fa2d";
         private const string BerserkBuffPrototype = "dedd82d493484e8caf6d7aa6e243f55e";
@@ -75,17 +80,27 @@ namespace ArmouryOrks.Editor
         private const string MaterialPath = Art + "/Choppa.mat";
         private const string PackedMaskPath = Art + "/Choppa_MetallicSmoothness.asset";
         private const string PackedNormalPath = Art + "/Choppa_Normal.asset";
+        private const string BigChoppaFbxPath = Art + "/BigChoppa.fbx";
+        private const string BigChoppaPrefabPath = Art + "/BigChoppa.prefab";
+        private const string BigChoppaBaseColorPath = Art + "/BigChoppa_BaseColor.png";
+        private const string BigChoppaMetallicPath = Art + "/BigChoppa_Metallic.png";
+        private const string BigChoppaNormalPath = Art + "/BigChoppa_Normal_Source.png";
+        private const string BigChoppaRoughnessPath = Art + "/BigChoppa_Roughness.png";
+        private const string BigChoppaMaterialPath = Art + "/BigChoppa.mat";
+        private const string BigChoppaPackedMaskPath = Art + "/BigChoppa_MetallicSmoothness.asset";
+        private const string BigChoppaPackedNormalPath = Art + "/BigChoppa_Normal.asset";
+        private const string BigChoppaGripMeshPath = Art + "/BigChoppa_GripAligned.asset";
 
         // Vanilla one-handed primitive axe; uses the BrutalOneHanded animation style.
         private const string WeaponPrototype = "b61740707f6b477f9ed139b22a81d245";
 
-        [MenuItem("Armoury Orks/Build 0.1.2")]
+        [MenuItem("Armoury Orks/Build 0.2.11 Test")]
         public static void Build()
         {
             Generate();
             Modification mod = AssetDatabase.LoadAssetAtPath<Modification>(Root + "/ArmouryOrks.asset");
             if (mod == null) throw new InvalidOperationException("ArmouryOrks Modification asset was not found.");
-            mod.Manifest.Version = "0.1.2";
+            mod.Manifest.Version = "0.2.11";
             EditorUtility.SetDirty(mod);
             AssetDatabase.SaveAssets();
             var result = Builder.Build(mod);
@@ -100,6 +115,8 @@ namespace ArmouryOrks.Editor
             Directory.CreateDirectory(Path.GetDirectoryName(Localization));
             GenerateArt();
             GenerateBlueprint();
+            GenerateBigChoppaArt();
+            GenerateBigChoppaBlueprint();
             WriteLocalization();
             AssetDatabase.Refresh();
             Debug.Log("[ArmouryOrks] Choppa generated. ToyBox name: Choppa; Blueprint: " + WeaponGuid);
@@ -227,6 +244,9 @@ namespace ArmouryOrks.Editor
         }
 
         private static Texture2D PackMetallicSmoothness(Texture2D metallic, Texture2D roughness)
+            => PackMetallicSmoothness(metallic, roughness, PackedMaskPath, "Choppa_MetallicSmoothness");
+
+        private static Texture2D PackMetallicSmoothness(Texture2D metallic, Texture2D roughness, string outputPath, string textureName)
         {
             if (metallic.width != roughness.width || metallic.height != roughness.height)
                 throw new InvalidDataException("Choppa metallic and roughness textures have different dimensions.");
@@ -235,22 +255,25 @@ namespace ArmouryOrks.Editor
             for (int i = 0; i < metal.Length; i++)
                 metal[i] = new Color32(metal[i].r, 0, 0, (byte)(255 - rough[i].r));
             Texture2D packed = new Texture2D(metallic.width, metallic.height, TextureFormat.RGBA32, true, true)
-                { name = "Choppa_MetallicSmoothness" };
+                { name = textureName };
             packed.SetPixels32(metal);
             packed.Apply(true, false);
-            return ReplaceTextureAsset(packed, PackedMaskPath);
+            return ReplaceTextureAsset(packed, outputPath);
         }
 
         private static Texture2D PackUnityNormal(Texture2D source)
+            => PackUnityNormal(source, PackedNormalPath, "Choppa_Normal");
+
+        private static Texture2D PackUnityNormal(Texture2D source, string outputPath, string textureName)
         {
             Color32[] pixels = source.GetPixels32();
             for (int i = 0; i < pixels.Length; i++)
                 pixels[i] = new Color32(255, pixels[i].g, 255, pixels[i].r);
             Texture2D packed = new Texture2D(source.width, source.height, TextureFormat.RGBA32, true, true)
-                { name = "Choppa_Normal" };
+                { name = textureName };
             packed.SetPixels32(pixels);
             packed.Apply(true, false);
-            return ReplaceTextureAsset(packed, PackedNormalPath);
+            return ReplaceTextureAsset(packed, outputPath);
         }
 
         private static Texture2D ReplaceTextureAsset(Texture2D source, string path)
@@ -320,6 +343,186 @@ namespace ArmouryOrks.Editor
                 else ClearAbilitySlot(weapon, "Ability5");
                 File.WriteAllText(Path.Combine(Blueprints, TierFiles[i] + ".jbp"), weapon.ToString(Formatting.Indented));
             }
+        }
+
+        private static void GenerateBigChoppaArt()
+        {
+            AssetDatabase.ImportAsset(BigChoppaFbxPath, ImportAssetOptions.ForceSynchronousImport);
+            ModelImporter importer = AssetImporter.GetAtPath(BigChoppaFbxPath) as ModelImporter;
+            if (importer == null) throw new InvalidDataException("BigChoppa.fbx could not be imported.");
+            importer.meshCompression = ModelImporterMeshCompression.Off;
+            importer.importNormals = ModelImporterNormals.Import;
+            importer.importTangents = ModelImporterTangents.CalculateMikk;
+            importer.materialImportMode = ModelImporterMaterialImportMode.None;
+            importer.optimizeMeshPolygons = true;
+            importer.optimizeMeshVertices = true;
+            importer.SaveAndReimport();
+
+            GameObject fbx = AssetDatabase.LoadAssetAtPath<GameObject>(BigChoppaFbxPath);
+            if (fbx == null) throw new InvalidDataException("Big Choppa FBX is missing after import.");
+            Material material = CreateBigChoppaMaterial();
+
+            GameObject root = new GameObject("BigChoppa_Root");
+            EquipmentOffsets offsets = root.AddComponent<EquipmentOffsets>();
+            ConfigureBigChoppaHolsterOffsets(offsets);
+            AddComponentByName(root, "FxLocatorMapper", false);
+            AddComponentByName(root, "ArmouryOrks.Runtime.OrkWeaponMaterialBinder", true);
+
+            // Castellan Axe melee poses are authored around an additional 45-degree visual root.
+            // Keep that hierarchy while omitting its bolter muzzle and shot-pose controller.
+            GameObject visual = new GameObject("BigChoppa_Visual");
+            visual.transform.SetParent(root.transform, false);
+            visual.transform.localRotation = Quaternion.Euler(0f, 0f, 45f);
+
+            GameObject model = UnityEngine.Object.Instantiate(fbx);
+            model.name = "BigChoppa_FBX_Model";
+            model.transform.SetParent(visual.transform, false);
+            // Match the proven Castellan Axe two-handed grip and attack orientation.
+            // Preserve the proven Castellan-local mesh placement. Drawn grip correction belongs
+            // to EquipmentOffsets.m_MainHand, not to this nested visual transform.
+            model.transform.localPosition = new Vector3(0.335f, 0.265f, 0.02f);
+            model.transform.localRotation = Quaternion.Euler(0f, 0f, 225f)
+                * Quaternion.AngleAxis(150f, Vector3.right);
+            // The FBX is already 30% larger than the regular Choppa. Use the same Meshy-to-game
+            // conversion as that weapon so the size increase is applied only once.
+            model.transform.localScale = Vector3.one * 54.4f;
+            // The doll-room attachment path can rebuild/reset prefab transforms. Bake the small
+            // grip correction into the mesh itself, which cannot be discarded by attachment code.
+            // The exaggerated 0.2.9 diagnostic established that positive root-space X/Y moves
+            // the visible mesh left/down in the doll room. Apply the small inverse correction so
+            // the grip moves right toward the hand and slightly upward.
+            BakeBigChoppaGripAlignment(model, visual.transform.localRotation,
+                new Vector3(-0.03f, -0.05f, 0f));
+            foreach (Renderer renderer in model.GetComponentsInChildren<Renderer>(true))
+                renderer.sharedMaterial = material;
+
+            PrefabUtility.SaveAsPrefabAsset(root, BigChoppaPrefabPath);
+            UnityEngine.Object.DestroyImmediate(root);
+            AssetDatabase.SaveAssets();
+        }
+
+        private static void ConfigureBigChoppaHolsterOffsets(EquipmentOffsets offsets)
+        {
+            SerializedObject serialized = new SerializedObject(offsets);
+            serialized.FindProperty("m_MainHand.Position").vector3Value = Vector3.zero;
+            SerializedProperty slots = serialized.FindProperty("m_SlotOffsets");
+            slots.arraySize = 12;
+            for (int i = 0; i < slots.arraySize; i++)
+            {
+                SerializedProperty slot = slots.GetArrayElementAtIndex(i);
+                slot.FindPropertyRelative("Position").vector3Value = Vector3.zero;
+                slot.FindPropertyRelative("Rotation").vector3Value = Vector3.zero;
+            }
+            ConfigureHolsterSlot(slots, 6, new Vector3(0.18f, -0.18f, -0.12f), new Vector3(90f, 0f, 0f));
+            ConfigureHolsterSlot(slots, 8, new Vector3(-0.18f, -0.18f, -0.12f), new Vector3(90f, 0f, 0f));
+            serialized.ApplyModifiedPropertiesWithoutUndo();
+        }
+
+        private static void BakeBigChoppaGripAlignment(GameObject model, Quaternion visualRotation,
+            Vector3 desiredRootSpaceOffset)
+        {
+            MeshFilter filter = model.GetComponentInChildren<MeshFilter>(true);
+            if (filter == null || filter.sharedMesh == null)
+                throw new InvalidDataException("Big Choppa mesh filter is missing.");
+
+            // Convert the requested root-space movement back through the visual and model
+            // rotations, then through the model scale, to obtain a source-mesh vertex offset.
+            Vector3 localVertexOffset = Quaternion.Inverse(model.transform.localRotation)
+                * (Quaternion.Inverse(visualRotation) * desiredRootSpaceOffset);
+            localVertexOffset /= model.transform.localScale.x;
+
+            Mesh generated = UnityEngine.Object.Instantiate(filter.sharedMesh);
+            generated.name = "BigChoppa_GripAligned";
+            Vector3[] vertices = generated.vertices;
+            for (int i = 0; i < vertices.Length; i++) vertices[i] += localVertexOffset;
+            generated.vertices = vertices;
+            generated.RecalculateBounds();
+
+            Mesh existing = AssetDatabase.LoadAssetAtPath<Mesh>(BigChoppaGripMeshPath);
+            if (existing == null)
+            {
+                AssetDatabase.CreateAsset(generated, BigChoppaGripMeshPath);
+                existing = generated;
+            }
+            else
+            {
+                EditorUtility.CopySerialized(generated, existing);
+                UnityEngine.Object.DestroyImmediate(generated);
+                EditorUtility.SetDirty(existing);
+            }
+            filter.sharedMesh = existing;
+        }
+
+        private static Material CreateBigChoppaMaterial()
+        {
+            AssetDatabase.ImportAsset(BigChoppaBaseColorPath, ImportAssetOptions.ForceSynchronousImport);
+            Texture2D baseColor = AssetDatabase.LoadAssetAtPath<Texture2D>(BigChoppaBaseColorPath);
+            if (baseColor == null) throw new InvalidDataException("Big Choppa base-colour texture is missing.");
+            Texture2D metallic = LoadPng(BigChoppaMetallicPath, true);
+            Texture2D roughness = LoadPng(BigChoppaRoughnessPath, true);
+            Texture2D normalSource = LoadPng(BigChoppaNormalPath, true);
+            Texture2D mask = PackMetallicSmoothness(metallic, roughness, BigChoppaPackedMaskPath, "BigChoppa_MetallicSmoothness");
+            Texture2D normal = PackUnityNormal(normalSource, BigChoppaPackedNormalPath, "BigChoppa_Normal");
+
+            Shader shader = Shader.Find("Owlcat/Lit");
+            if (shader == null) throw new InvalidOperationException("Owlcat/Lit is unavailable.");
+            Material material = AssetDatabase.LoadAssetAtPath<Material>(BigChoppaMaterialPath);
+            if (material == null)
+            {
+                material = new Material(shader) { name = "BigChoppa" };
+                AssetDatabase.CreateAsset(material, BigChoppaMaterialPath);
+            }
+            else material.shader = shader;
+            SetTexture(material, baseColor, "_BaseMap", "_BaseColorMap", "_MainTex");
+            SetTexture(material, mask, "_MetallicGlossMap", "_MaskMap", "_MasksMap");
+            SetTexture(material, normal, "_BumpMap", "_NormalMap");
+            SetFloat(material, 1f, "_Metallic");
+            SetFloat(material, 1f, "_Smoothness");
+            SetFloat(material, 0.95f, "_Roughness");
+            SetColor(material, Color.white, "_BaseColor", "_Color", "_AdditionalAlbedoColor");
+            material.EnableKeyword("_METALLICSPECGLOSSMAP");
+            material.EnableKeyword("_NORMALMAP");
+            EditorUtility.SetDirty(material);
+            AssetDatabase.SaveAssets();
+            return material;
+        }
+
+        private static void GenerateBigChoppaBlueprint()
+        {
+            UnityEngine.Object prefab = AssetDatabase.LoadMainAssetAtPath(BigChoppaPrefabPath);
+            if (prefab == null || !AssetDatabase.TryGetGUIDAndLocalFileIdentifier(prefab, out string prefabGuid, out long prefabFileId))
+                throw new InvalidDataException("Big Choppa prefab could not be resolved.");
+
+            JObject weapon = PrepareClone(Load(TwoHandedWeaponPrototype), BigChoppaWeaponGuid, TwoHandedWeaponPrototype);
+            weapon["Data"]["Components"] = new JArray();
+            SetText(weapon, "big-choppa-v1-name", "big-choppa-v1-description", "big-choppa-v1-flavor");
+            weapon["Data"]["m_VisualParameters"]["m_WeaponModel"] = UnityReference(prefabGuid, prefabFileId);
+            AddOverride(weapon, "m_VisualParameters.m_WeaponModel");
+            weapon["Data"]["m_VisualParameters"]["m_WeaponAnimationStyle"] = "TwoHandedHammer";
+            AddOverride(weapon, "m_VisualParameters.m_WeaponAnimationStyle");
+            Override(weapon, "Family", "Primitive");
+            Override(weapon, "Classification", "Sword");
+            Override(weapon, "m_HoldingType", "TwoHanded");
+            Override(weapon, "IsTwoHanded", true);
+            Override(weapon, "WarhammerDamage", 14);
+            Override(weapon, "WarhammerMaxDamage", 20);
+            Override(weapon, "WarhammerPenetration", 25);
+            Override(weapon, "ItemLevel", 9);
+            Override(weapon, "m_Enchantments", new JArray());
+            Override(weapon, "m_Rarity", "Pattern");
+            Override(weapon, "CanBeUsedInGame", true);
+            Override(weapon, "IsUnlootable", false);
+            Override(weapon, "IsNonRemovable", false);
+            Override(weapon, "m_IsNotable", true);
+            Override(weapon, "m_DamageType", new JObject { ["Type"] = "Rending" });
+            SetAbilitySlot(weapon, "Ability1", "SingleShot", TwoHandedStrikeAbility, PowerAxeFx, 1);
+            SetAbilitySlot(weapon, "Ability2", "AOE", TwoHandedCleaveAbility, PowerAxeFx, 2);
+            ClearAbilitySlot(weapon, "Ability3");
+            ClearAbilitySlot(weapon, "Ability4");
+            ClearAbilitySlot(weapon, "Ability5");
+            weapon["Data"]["m_AttackOfOpportunityAbility"] = "!bp_" + TwoHandedStrikeAbility;
+            AddOverride(weapon, "m_AttackOfOpportunityAbility");
+            SaveBlueprint("BigChoppa_V1_Item", weapon);
         }
 
         private static void GenerateSpecialAbilities()
@@ -523,6 +726,8 @@ namespace ArmouryOrks.Editor
             slot["OnHitOverrideType"] = "None";
             slot["m_OnHitActions"] = null;
             slot["AP"] = 0;
+            foreach (string property in new[] { "Type", "Mode", "m_Ability", "m_FXSettings", "OnHitOverrideType", "m_OnHitActions", "AP" })
+                AddOverride(weapon, $"WeaponAbilities.{slotName}.{property}");
         }
 
         private static UnityEngine.Object PrepareInventoryIcon()
@@ -638,6 +843,9 @@ namespace ArmouryOrks.Editor
             strings["choppa-v6-slaughter-description"] = Entry("Strike all enemies around the target area for 150% weapon damage, then enter a slaughter-frenzy for 2 rounds. Cost: 2 AP. Usable once per combat.");
             strings["choppa-slaughter-buff-name"] = Entry("Slaughter-frenzy");
             strings["choppa-slaughter-buff-description"] = Entry("+20% damage and +10 Weapon Skill, but -20% parry and dodge chance for 2 rounds.");
+            strings["big-choppa-v1-name"] = Entry("Big Choppa");
+            strings["big-choppa-v1-description"] = Entry("A two-handed Ork blade built for bigger swings, louder impacts and considerably less subtlety.\n\n• Test version V1\n• Damage: 14-20\n• Armour penetration: 25%\n• Strike\n• Cleave");
+            strings["big-choppa-v1-flavor"] = Entry("'If ya need two hands, it'z twice as choppy.'");
             JObject document = new JObject
             {
                 ["strings"] = strings

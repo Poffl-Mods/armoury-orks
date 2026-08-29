@@ -115,6 +115,18 @@
     "choppa-slaughter-buff-description": {
       "Offset": 0,
       "Text": "+20% damage and +10 Weapon Skill, but -20% parry and dodge chance for 2 rounds."
+    },
+    "big-choppa-v1-name": {
+      "Offset": 0,
+      "Text": "Big Choppa"
+    },
+    "big-choppa-v1-description": {
+      "Offset": 0,
+      "Text": "A two-handed Ork blade built for bigger swings, louder impacts and considerably less subtlety.\n\n• Test version V1\n• Damage: 14-20\n• Armour penetration: 25%\n• Strike\n• Cleave"
+    },
+    "big-choppa-v1-flavor": {
+      "Offset": 0,
+      "Text": "'If ya need two hands, it'z twice as choppy.'"
     }
   }
 }

@@ -8,6 +8,11 @@ namespace ArmouryOrks.Runtime
         [OwlcatModificationEnterPoint]
         public static void Initialize(OwlcatModification modification)
         {
+            ChoppaProgressionController.EnsureController();
+            modification.OnSetEnabled += enabled =>
+            {
+                if (enabled) ChoppaProgressionController.EnsureController();
+            };
             Debug.Log("[ArmouryOrks] Runtime initialized.");
         }
     }

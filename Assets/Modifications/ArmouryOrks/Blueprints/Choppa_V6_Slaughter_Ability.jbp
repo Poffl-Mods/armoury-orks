@@ -1,0 +1,223 @@
+{
+  "AssetId": "b9f72f07ca7e47a2a3c9732ff8ac9895",
+  "Data": {
+    "$type": "da11db195c86e0d4dae17a2c03a4ba9a, BlueprintAbility",
+    "PrototypeLink": "0db7f73376e14ac6ab3a66b3d71afb90",
+    "m_Overrides": [
+      "m_DisplayName",
+      "m_Description",
+      "m_Icon",
+      "$WarhammerOverrideAbilityWeapon$choppa-v6-slaughter",
+      "$WarhammerCooldown$choppa-v6-slaughter",
+      "Type",
+      "AbilityParamsSource",
+      "ActionPointCost",
+      "VeilThicknessPointsToAdd",
+      "CombatStateRestriction"
+    ],
+    "Components": [
+      {
+        "$type": "9e5d6fea90c0cb9418a322c839a11cf8, WarhammerCooldown",
+        "name": "$WarhammerCooldown$choppa-v6-slaughter",
+        "m_Flags": 0,
+        "PrototypeLink": {
+          "guid": "",
+          "name": ""
+        },
+        "m_Overrides": [],
+        "CooldownInRounds": 1,
+        "UntilEndOfCombat": true
+      },
+      {
+        "$type": "66e032e5cf38801428940a1a0d14b946, AbilityEffectRunAction",
+        "name": "$AbilityEffectRunAction$ac784c01-2ff1-4be3-b0bd-ebfbf23d0a02",
+        "m_Flags": 0,
+        "PrototypeLink": {
+          "guid": "0db7f73376e14ac6ab3a66b3d71afb90",
+          "name": "$AbilityEffectRunAction$ac784c01-2ff1-4be3-b0bd-ebfbf23d0a02"
+        },
+        "m_Overrides": [],
+        "SavingThrowType": "Unknown",
+        "Actions": {
+          "Actions": [
+            {
+              "$type": "5d13a597de91e4746b804f8233518523, ContextActionApplyBuff",
+              "name": "$ContextActionApplyBuff$choppa-slaughter",
+              "m_Buff": "!bp_3a432daf113644c0b8814360346874dc",
+              "BuffEndCondition": "CombatEnd",
+              "Permanent": false,
+              "DurationValue": {
+                "BonusValue": {
+                  "ValueType": "Simple",
+                  "Value": 0,
+                  "ValueRank": "Default",
+                  "ValueShared": "Damage",
+                  "Property": "None",
+                  "m_CustomProperty": null,
+                  "PropertyName": "Value1"
+                },
+                "RoundsValue": {
+                  "ValueType": "Simple",
+                  "Value": 2,
+                  "ValueRank": "Default",
+                  "ValueShared": "Damage",
+                  "Property": "None",
+                  "m_CustomProperty": null,
+                  "PropertyName": "Value1"
+                }
+              },
+              "ToCaster": true,
+              "AsChild": true,
+              "SameDuration": false,
+              "AddFactSource": false
+            }
+          ]
+        }
+      },
+      {
+        "$type": "c788cf748ec86bc45b986ac4de28cf45, AbilitySpawnFx",
+        "name": "$AbilitySpawnFx$d64d8ecd-26f2-4a3b-af79-7a3ca2eabb46",
+        "m_Flags": 0,
+        "PrototypeLink": {
+          "guid": "0db7f73376e14ac6ab3a66b3d71afb90",
+          "name": "$AbilitySpawnFx$d64d8ecd-26f2-4a3b-af79-7a3ca2eabb46"
+        },
+        "m_Overrides": [],
+        "PrefabLink": {
+          "AssetId": "359c978c57ddbba46bcd3187254badf5"
+        },
+        "Time": "OnApplyEffect",
+        "Anchor": "Caster",
+        "WeaponTarget": "None",
+        "DestroyOnCast": false,
+        "Delay": 0.0,
+        "PositionAnchor": "None",
+        "UseExtraAttachment": false,
+        "AttachingSnapperIndex": 0,
+        "OrientationAnchor": "None",
+        "OrientationMode": "Copy"
+      },
+      {
+        "$type": "e6da52cf4bc945a1b3276a25991d7a68, WarhammerAbilityAttackDelivery",
+        "name": "$WarhammerAbilityAttackDelivery$0fc866c7-7e30-4af4-9228-2578ac05344c",
+        "m_Flags": 0,
+        "PrototypeLink": {
+          "guid": "0db7f73376e14ac6ab3a66b3d71afb90",
+          "name": "$WarhammerAbilityAttackDelivery$0fc866c7-7e30-4af4-9228-2578ac05344c"
+        },
+        "m_Overrides": [],
+        "WeaponAttack": "None",
+        "Special": "Pattern",
+        "m_IsProjectile": false,
+        "UseBestShootingPosition": true,
+        "ControlledScatter": false,
+        "m_PatternSpreadWithProjectile": false,
+        "AdditionalDamageInstancesCount": 0,
+        "m_PatternSettings": {
+          "Pattern": {
+            "m_Type": "Custom",
+            "m_Blueprint": "!bp_685368353f2e43b695d98449d8bf3903",
+            "m_Radius": 0,
+            "m_Angle": 0
+          },
+          "Targets": "Enemy",
+          "CastOnSameLevel": false,
+          "m_IgnoreLos": false,
+          "m_UseMeleeLos": false,
+          "m_IgnoreLevelDifference": true,
+          "m_Directional": false,
+          "CalculateAttackFromPatternCentre": false
+        },
+        "m_DisableWeaponAttackDamage": false,
+        "m_DisableDodgeForAlly": false,
+        "m_DisableOverpenetration": false,
+        "m_AutoHit": false,
+        "m_IsLosDefinedByPattern": false
+      },
+      {
+        "$type": "c12d0b47a00427c47be7af83bb98bf3c, WarhammerOverrideAbilityWeapon",
+        "name": "$WarhammerOverrideAbilityWeapon$choppa-v6-slaughter",
+        "m_Flags": 0,
+        "PrototypeLink": {
+          "guid": "",
+          "name": ""
+        },
+        "m_Overrides": [],
+        "m_Weapon": "!bp_0215570a37cd46fe91f919f914203c49",
+        "m_ForceShowWeaponDamageInUi": true
+      }
+    ],
+    "Author": "AlexeySilaev",
+    "Comment": "АоЕ-абилка, накладывающая с некоторым шансом стан.",
+    "m_DisplayName": {
+      "m_Key": "choppa-slaughter-name",
+      "m_OwnerString": "",
+      "m_OwnerPropertyPath": "",
+      "m_JsonPath": "",
+      "Shared": null
+    },
+    "m_Description": {
+      "m_Key": "choppa-v6-slaughter-description",
+      "m_OwnerString": "",
+      "m_OwnerPropertyPath": "",
+      "m_JsonPath": "",
+      "Shared": null
+    },
+    "m_Icon": {
+      "guid": "7798cb69741ccc542b1286cff7272b6b",
+      "fileid": 21300000
+    },
+    "m_AllowNonContextActions": false,
+    "Type": "Weapon",
+    "Range": "Custom",
+    "CustomRange": 1,
+    "MinRange": 0,
+    "ActionPointCost": 2,
+    "AbilityParamsSource": "Weapon",
+    "PsychicPower": "Minor",
+    "VeilThicknessPointsToAdd": 0,
+    "ParamsSkill": "SkillAthletics",
+    "CooldownRounds": 2,
+    "CanTargetPoint": true,
+    "CanTargetEnemies": true,
+    "CanTargetFriends": false,
+    "CanTargetSelf": false,
+    "Hidden": false,
+    "HiddenInUI": false,
+    "DefaultSlotIndex": -1,
+    "DisableLog": false,
+    "DisableBestShootingPosition": false,
+    "NeedEquipWeapons": false,
+    "NotOffensive": false,
+    "ShowInDialogue": false,
+    "IsStarshipAbility": false,
+    "EffectOnAlly": "None",
+    "EffectOnEnemy": "Harmful",
+    "m_Parent": null,
+    "Animation": "BattleCry",
+    "CastInOffHand": false,
+    "UseOnMechadendrite": false,
+    "UsedMechadendrite": "Utility",
+    "m_TargetMapObjects": false,
+    "IsFreeAction": false,
+    "ShouldTurnToTarget": true,
+    "SyncRotationAndAttack": false,
+    "SyncRotationDelay": 0.0,
+    "m_IsStratagem": false,
+    "UsingInThreateningArea": "CanUseWithoutAOO",
+    "UsingInOverwatchArea": "WillCauseAttack",
+    "CombatStateRestriction": "InCombatOnly",
+    "m_AbilityGroups": [],
+    "MaterialComponent": {
+      "m_Item": null,
+      "Count": 1
+    },
+    "ResourceAssetIds": [],
+    "m_FXSettings": null,
+    "m_AbilityTag": "None",
+    "m_CombatHudCommandsOverride": null
+  },
+  "Meta": {
+    "ShadowDeleted": false
+  }
+}

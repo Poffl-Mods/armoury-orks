@@ -1,16 +1,120 @@
 {
   "strings": {
-    "choppa-name": {
+    "choppa-v1-name": {
       "Offset": 0,
       "Text": "Choppa"
     },
-    "choppa-description": {
+    "choppa-v1-description": {
       "Offset": 0,
-      "Text": "A brutally effective Ork cleaver assembled from scavenged metal, spikes and enthusiasm."
+      "Text": "A heavy Ork blade hammered together from scavenged metal. It is crude, badly balanced and remarkably effective when swung with sufficient enthusiasm.\n\n• Levels: 1-15\n• Damage: 9-15\n• Armour penetration: 15%\n• WAAAGH!"
     },
-    "choppa-flavor": {
+    "choppa-v1-flavor": {
       "Offset": 0,
-      "Text": "If it is heavy, sharp and makes a satisfying noise, it is a proper choppa."
+      "Text": "'It chops. Dat makes it a choppa.'"
+    },
+    "choppa-v2-name": {
+      "Offset": 0,
+      "Text": "Sharp Choppa"
+    },
+    "choppa-v2-description": {
+      "Offset": 0,
+      "Text": "Someone has taken the unusual step of sharpening this Choppa. The irregular edge now catches armour, flesh and anything else unfortunate enough to stand nearby.\n\n• Levels: 16-25\n• Damage: 11-16\n• Armour penetration: 15%\n• WAAAGH!"
+    },
+    "choppa-v2-flavor": {
+      "Offset": 0,
+      "Text": "'Dis one's sharp. Sharp is better.'"
+    },
+    "choppa-v3-name": {
+      "Offset": 0,
+      "Text": "'Urty Choppa"
+    },
+    "choppa-v3-description": {
+      "Offset": 0,
+      "Text": "This scarred weapon has earned a reputation for leaving survivors in considerable discomfort. Orks consider this a sign of quality workmanship.\n\n• Levels: 26-35\n• Damage: 20-30\n• Armour penetration: 20%\n• WAAAGH!\n• WAAAAAAAAAAGH!"
+    },
+    "choppa-v3-flavor": {
+      "Offset": 0,
+      "Text": "'If 'e's still shoutin', hit 'im again.'"
+    },
+    "choppa-v4-name": {
+      "Offset": 0,
+      "Text": "Killy Choppa"
+    },
+    "choppa-v4-description": {
+      "Offset": 0,
+      "Text": "Layer upon layer of dried blood, crude repairs and replacement teeth record the Choppa's long service. Its owners stopped counting victories when they ran out of fingers.\n\n• Levels: 36-43\n• Damage: 24-36\n• Armour penetration: 20%\n• WAAAGH!\n• WAAAAAAAAAAGH!"
+    },
+    "choppa-v4-flavor": {
+      "Offset": 0,
+      "Text": "'Sharp is good. Killy is better.'"
+    },
+    "choppa-v5-name": {
+      "Offset": 0,
+      "Text": "Dead Killy Choppa"
+    },
+    "choppa-v5-description": {
+      "Offset": 0,
+      "Text": "A brutally oversized edge reinforced with whatever metal its owner could steal. Among Orks, calling a weapon 'dead killy' is both high praise and a warning to keep well clear of it.\n\n• Levels: 44-49\n• Damage: 30-46\n• Armour penetration: 25%\n• WAAAGH!\n• SLAUGHTER"
+    },
+    "choppa-v5-flavor": {
+      "Offset": 0,
+      "Text": "'One swing. Lotsa bits.'"
+    },
+    "choppa-v6-name": {
+      "Offset": 0,
+      "Text": "Da Bestest Choppa"
+    },
+    "choppa-v6-description": {
+      "Offset": 0,
+      "Text": "Every Ork claims to own the biggest and best Choppa. The bearer of this weapon has settled the argument repeatedly and with considerable finality.\n\n• Levels: 50-55\n• Damage: 38-55\n• Armour penetration: 30%\n• WAAAGH!\n• SLAUGHTER"
+    },
+    "choppa-v6-flavor": {
+      "Offset": 0,
+      "Text": "'Da best Choppa belongs to da Ork still standin'.'"
+    },
+    "choppa-waaagh-name": {
+      "Offset": 0,
+      "Text": "WAAAGH!"
+    },
+    "choppa-waaagh-description": {
+      "Offset": 0,
+      "Text": "Charge an enemy and strike with the equipped Choppa. Cost: 1 AP."
+    },
+    "choppa-strike-name": {
+      "Offset": 0,
+      "Text": "Strike"
+    },
+    "choppa-strike-description": {
+      "Offset": 0,
+      "Text": "Make a single melee attack with the equipped Choppa. Cost: 1 AP."
+    },
+    "choppa-greater-waaagh-name": {
+      "Offset": 0,
+      "Text": "WAAAAAAAAAAGH!"
+    },
+    "choppa-greater-waaagh-description": {
+      "Offset": 0,
+      "Text": "Release a deafening war cry. Enemies in the area must pass a Toughness resistance test or become stunned for 1 round. Cost: 1 AP. Usable once per combat."
+    },
+    "choppa-slaughter-name": {
+      "Offset": 0,
+      "Text": "SLAUGHTER"
+    },
+    "choppa-v5-slaughter-description": {
+      "Offset": 0,
+      "Text": "Strike all enemies around the target area for 150% weapon damage, then enter a slaughter-frenzy for 2 rounds. Cost: 2 AP. Usable once per combat."
+    },
+    "choppa-v6-slaughter-description": {
+      "Offset": 0,
+      "Text": "Strike all enemies around the target area for 150% weapon damage, then enter a slaughter-frenzy for 2 rounds. Cost: 2 AP. Usable once per combat."
+    },
+    "choppa-slaughter-buff-name": {
+      "Offset": 0,
+      "Text": "Slaughter-frenzy"
+    },
+    "choppa-slaughter-buff-description": {
+      "Offset": 0,
+      "Text": "+20% damage and +10 Weapon Skill, but -20% parry and dodge chance for 2 rounds."
     }
   }
 }

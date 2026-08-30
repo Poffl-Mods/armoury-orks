@@ -206,7 +206,7 @@
     "m_IsStratagem": false,
     "UsingInThreateningArea": "CanUseWithoutAOO",
     "UsingInOverwatchArea": "WillCauseAttack",
-    "CombatStateRestriction": "InCombatOnly",
+    "CombatStateRestriction": "NoRestriction",
     "m_AbilityGroups": [],
     "MaterialComponent": {
       "m_Item": null,

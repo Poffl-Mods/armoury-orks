@@ -122,11 +122,131 @@
     },
     "big-choppa-v1-description": {
       "Offset": 0,
-      "Text": "A two-handed Ork blade built for bigger swings, louder impacts and considerably less subtlety.\n\n• Test version V1\n• Damage: 14-20\n• Armour penetration: 25%\n• Strike\n• Cleave"
+      "Text": "A two-handed Ork blade assembled from enough scavenged metal to armour a small vehicle. Its owner chose instead to attach it all to one handle.\n\n• Levels: 1-15\n• Damage: 12-21\n• Armour penetration: 25%\n• BIG SWING!"
     },
     "big-choppa-v1-flavor": {
       "Offset": 0,
       "Text": "'If ya need two hands, it'z twice as choppy.'"
+    },
+    "big-choppa-v2-name": {
+      "Offset": 0,
+      "Text": "Sharp Big Choppa"
+    },
+    "big-choppa-v2-description": {
+      "Offset": 0,
+      "Text": "Someone has sharpened this already excessive weapon. The work is uneven, enthusiastic and capable of removing several important things at once.\n\n• Levels: 16-25\n• Damage: 15-26\n• Armour penetration: 25%\n• BIG SWING!"
+    },
+    "big-choppa-v2-flavor": {
+      "Offset": 0,
+      "Text": "'It got bigger. Dat means it got better.'"
+    },
+    "big-choppa-v3-name": {
+      "Offset": 0,
+      "Text": "'Urty Big Choppa"
+    },
+    "big-choppa-v3-description": {
+      "Offset": 0,
+      "Text": "Repeated impacts have bent the blade into a shape its maker insists was intentional. Orks judge the weapon by the size of the dents it leaves behind.\n\n• Levels: 26-35\n• Damage: 21-30\n• Armour penetration: 30%\n• BIG SWING!\n• SPIN TA WIN!"
+    },
+    "big-choppa-v3-flavor": {
+      "Offset": 0,
+      "Text": "'Now dat is a proper Choppa.'"
+    },
+    "big-choppa-v4-name": {
+      "Offset": 0,
+      "Text": "Killy Big Choppa"
+    },
+    "big-choppa-v4-description": {
+      "Offset": 0,
+      "Text": "This Big Choppa has accumulated extra plates, teeth and weight with every repair. Subtlety was discarded early in the process to make room for more metal.\n\n• Levels: 36-43\n• Damage: 32-45\n• Armour penetration: 30%\n• BIG SWING!\n• SPIN TA WIN!"
+    },
+    "big-choppa-v4-flavor": {
+      "Offset": 0,
+      "Text": "'Stand back. Further. Bit further.'"
+    },
+    "big-choppa-v5-name": {
+      "Offset": 0,
+      "Text": "Dead Killy Big Choppa"
+    },
+    "big-choppa-v5-description": {
+      "Offset": 0,
+      "Text": "A dead killy monument to poor judgement, built too large for sensible warriors and therefore exactly large enough for an ambitious Ork.\n\n• Levels: 44-49\n• Damage: 37-56\n• Armour penetration: 35%\n• BIG SWING!\n• DA BIGGEST BONK!"
+    },
+    "big-choppa-v5-flavor": {
+      "Offset": 0,
+      "Text": "'Too big? Dat ain't a fing.'"
+    },
+    "big-choppa-v6-name": {
+      "Offset": 0,
+      "Text": "Da Biggest Choppa"
+    },
+    "big-choppa-v6-description": {
+      "Offset": 0,
+      "Text": "The final answer to the ancient Ork question of how large a Choppa ought to be: larger than its wielder, louder than nearby gunfire and preferably still accelerating.\n\n• Levels: 50-55\n• Damage: 43-64\n• Armour penetration: 40%\n• BIG SWING!\n• DA BIGGEST BONK!"
+    },
+    "big-choppa-v6-flavor": {
+      "Offset": 0,
+      "Text": "'Dis one ends arguments. An' floors Orks.'"
+    },
+    "big-choppa-big-swing-name": {
+      "Offset": 0,
+      "Text": "BIG SWING!"
+    },
+    "big-choppa-big-swing-description": {
+      "Offset": 0,
+      "Text": "Sweep a broad arc for 110% weapon damage and push every target back 1 cell. The wielder suffers -10% parry and dodge for 1 round. Cost: 2 AP."
+    },
+    "big-choppa-spin-name": {
+      "Offset": 0,
+      "Text": "SPIN TA WIN!"
+    },
+    "big-choppa-spin-description": {
+      "Offset": 0,
+      "Text": "Spin wildly, striking all nearby enemies for 100% weapon damage and pushing them back 1 cell. The wielder suffers -20 Weapon Skill and dodge for 1 round. Cost: 2 AP. Cooldown: 3 rounds."
+    },
+    "big-choppa-bonk-name": {
+      "Offset": 0,
+      "Text": "DA BIGGEST BONK!"
+    },
+    "big-choppa-bonk-description": {
+      "Offset": 0,
+      "Text": "Make one spectacularly ill-advised attack for 300% weapon damage. This attack can critically hit. After the attack, the wielder is knocked prone for 1 round. Cost: 2 AP. Usable once per combat."
+    },
+    "big-choppa-big-swing-buff-name": {
+      "Offset": 0,
+      "Text": "Overextended"
+    },
+    "big-choppa-big-swing-buff-description": {
+      "Offset": 0,
+      "Text": "-10% parry and dodge chance for 1 round."
+    },
+    "big-choppa-spin-buff-name": {
+      "Offset": 0,
+      "Text": "Dizzy"
+    },
+    "big-choppa-spin-buff-description": {
+      "Offset": 0,
+      "Text": "-20 Weapon Skill and dodge chance for 1 round."
+    },
+    "big-choppa-cleave-name": {
+      "Offset": 0,
+      "Text": "Cleave"
+    },
+    "big-choppa-cleave-description": {
+      "Offset": 0,
+      "Text": "Swing the Big Choppa through the three tiles directly in front of the wielder. Cost: 2 AP."
+    },
+    "power-klaw-v1-name": {
+      "Offset": 0,
+      "Text": "Power Klaw"
+    },
+    "power-klaw-v1-description": {
+      "Offset": 0,
+      "Text": "A roaring mechanical claw built from pistons, scavenged armour plate and the Ork conviction that anything worth grabbing is worth crushing.\n\n• Test version V1\n• Damage: 14-24\n• Armour penetration: 30%\n• Fist attack animations"
+    },
+    "power-klaw-v1-flavor": {
+      "Offset": 0,
+      "Text": "'Grab it. Squeeze it. If it stops movin', squeeze da next one.'"
     }
   }
 }

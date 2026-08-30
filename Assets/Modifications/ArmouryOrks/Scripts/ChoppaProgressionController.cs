@@ -14,7 +14,7 @@ using UnityEngine;
 
 namespace ArmouryOrks.Runtime
 {
-    /// <summary>Replaces older Choppa tiers outside combat according to party level.</summary>
+    /// <summary>Replaces older Ork weapon tiers outside combat according to party level.</summary>
     public sealed class ChoppaProgressionController : MonoBehaviour,
         ILevelUpCompleteUIHandler, IItemsCollectionHandler, IPartyCombatHandler
     {
@@ -23,6 +23,12 @@ namespace ArmouryOrks.Runtime
             "9f1a0cab53be493b96989c9a672d2ae5", "78f71e9a52ab4f8e9a46bd2390860ec2",
             "ed79a91f997e45c6bd68e154aca4884c", "3b41ba583ab84c01bed6b8ea0fa31229",
             "833093446bd84d6ea45fb862d3a9a027", "c20a56ca164f46a480704c4b348f381f"
+        };
+        private static readonly string[] BigChoppaGuids =
+        {
+            "f842bd6192ec4f9d91eb83278470c671", "a0f30782b1454053920b101af9e10908",
+            "9bd81c627e58489ba2495eeef5df8f77", "9afbdac806004903ab8c370d1c94b208",
+            "1a1602ca54e04a0b8231434b100dd175", "43d65e58f04c4ea580076b00f89b7ab0"
         };
 
         private static readonly MethodInfo SubscribeGlobalMethod = typeof(EventBus).GetMethod(
@@ -143,13 +149,20 @@ namespace ArmouryOrks.Runtime
         private void TryUpgradeItem(ItemEntity item, int targetTier)
         {
             if (item?.Blueprint == null) return;
-            int currentTier = Array.IndexOf(ChoppaGuids, item.Blueprint.AssetGuid.ToString());
+            string guid = item.Blueprint.AssetGuid.ToString();
+            if (Array.IndexOf(ChoppaGuids, guid) >= 0) TryUpgradeItemInSeries(item, targetTier, ChoppaGuids, "Choppa");
+            else if (Array.IndexOf(BigChoppaGuids, guid) >= 0) TryUpgradeItemInSeries(item, targetTier, BigChoppaGuids, "Big Choppa");
+        }
+
+        private void TryUpgradeItemInSeries(ItemEntity item, int targetTier, string[] series, string weaponName)
+        {
+            int currentTier = Array.IndexOf(series, item.Blueprint.AssetGuid.ToString());
             if (currentTier < 0 || currentTier >= targetTier) return;
 
-            BlueprintItem target = ResourcesLibrary.TryGetBlueprint(ChoppaGuids[targetTier]) as BlueprintItem;
+            BlueprintItem target = ResourcesLibrary.TryGetBlueprint(series[targetTier]) as BlueprintItem;
             if (target == null)
             {
-                Debug.LogError("[ArmouryOrks] Choppa tier blueprint was not found: " + ChoppaGuids[targetTier]);
+                Debug.LogError($"[ArmouryOrks] {weaponName} tier blueprint was not found: " + series[targetTier]);
                 return;
             }
 
@@ -160,7 +173,7 @@ namespace ArmouryOrks.Runtime
             if (item.Collection != null) item.Collection.Remove(item);
             ItemEntity replacement = collection.Add(target);
             if (slot != null) slot.InsertItem(replacement, false);
-            Debug.Log($"[ArmouryOrks] Choppa upgraded from V{currentTier + 1} to V{targetTier + 1} at party level {Game.Instance.Player.PartyLevel}.");
+            Debug.Log($"[ArmouryOrks] {weaponName} upgraded from V{currentTier + 1} to V{targetTier + 1} at party level {Game.Instance.Player.PartyLevel}.");
         }
 
         private static int TierForLevel(int level)

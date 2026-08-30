@@ -7,6 +7,7 @@
       "m_DisplayName",
       "m_Description",
       "m_FlavorText",
+      "m_Icon",
       "m_VisualParameters.m_WeaponModel",
       "m_VisualParameters.m_WeaponAnimationStyle",
       "Family",
@@ -78,7 +79,10 @@
       "m_JsonPath": "",
       "Shared": null
     },
-    "m_Icon": null,
+    "m_Icon": {
+      "guid": "05cc7a97859f1f44fa4ae86ca9527c8e",
+      "fileid": 21300000
+    },
     "m_FlavorText": {
       "m_Key": "big-choppa-v1-flavor",
       "m_OwnerString": "",
@@ -121,7 +125,7 @@
     "m_EquipmentEntityAlternatives": [],
     "m_ForcedRampColorPresetIndex": -1,
     "m_VisualParameters": {
-      "m_WeaponAnimationStyle": "TwoHandedHammer",
+      "m_WeaponAnimationStyle": "AxeTwoHanded",
       "m_SpecialAnimation": "None",
       "m_BurstAnimationDelay": 0.0,
       "m_WeaponModel": {
@@ -166,20 +170,20 @@
       "Ability2": {
         "Type": "AOE",
         "Mode": "Default",
-        "m_Ability": "!bp_163013a18e9c46419b2311454ad2b2c8",
+        "m_Ability": "!bp_a7412fd693214091aa88c7beb83ac108",
         "m_FXSettings": "!bp_5a72a93ee3bd4a049aa4ddef1e4c7f84",
         "OnHitOverrideType": "None",
         "m_OnHitActions": null,
         "AP": 2
       },
       "Ability3": {
-        "Type": "None",
+        "Type": "AOE",
         "Mode": "Default",
-        "m_Ability": null,
-        "m_FXSettings": null,
+        "m_Ability": "!bp_6d20484cfdd24639b3a4951149f1fea8",
+        "m_FXSettings": "!bp_5a72a93ee3bd4a049aa4ddef1e4c7f84",
         "OnHitOverrideType": "None",
         "m_OnHitActions": null,
-        "AP": 0
+        "AP": 2
       },
       "Ability4": {
         "Type": "None",
@@ -204,7 +208,7 @@
     "m_AttackOfOpportunityAbilityFXSettings": "!bp_0ebd832aea364e23a9aa6abc76228e2d",
     "Category": "Melee",
     "Family": "Primitive",
-    "Classification": "Sword",
+    "Classification": "None",
     "m_HoldingType": "TwoHanded",
     "m_Range": "Melee",
     "m_Heaviness": "NotHeavy",
@@ -231,8 +235,8 @@
       "Shared": null
     },
     "IsTwoHanded": true,
-    "WarhammerDamage": 14,
-    "WarhammerMaxDamage": 20,
+    "WarhammerDamage": 12,
+    "WarhammerMaxDamage": 21,
     "WarhammerPenetration": 25,
     "DodgePenetration": 0,
     "AdditionalHitChance": 0,

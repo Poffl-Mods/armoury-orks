@@ -1,0 +1,257 @@
+{
+  "AssetId": "43d65e58f04c4ea580076b00f89b7ab0",
+  "Data": {
+    "$type": "c00f723cccf2d314198c42a572c631fd, BlueprintItemWeapon",
+    "PrototypeLink": "993996a4c0a24463aa400b9441d4caa8",
+    "m_Overrides": [
+      "m_DisplayName",
+      "m_Description",
+      "m_FlavorText",
+      "m_Icon",
+      "m_VisualParameters.m_WeaponModel",
+      "m_VisualParameters.m_WeaponAnimationStyle",
+      "Family",
+      "Classification",
+      "m_HoldingType",
+      "IsTwoHanded",
+      "WarhammerDamage",
+      "WarhammerMaxDamage",
+      "WarhammerPenetration",
+      "ItemLevel",
+      "m_Enchantments",
+      "m_Rarity",
+      "CanBeUsedInGame",
+      "IsUnlootable",
+      "IsNonRemovable",
+      "m_IsNotable",
+      "m_DamageType",
+      "WeaponAbilities.Ability1.Type",
+      "WeaponAbilities.Ability1.Mode",
+      "WeaponAbilities.Ability1.m_Ability",
+      "WeaponAbilities.Ability1.m_FXSettings",
+      "WeaponAbilities.Ability1.OnHitOverrideType",
+      "WeaponAbilities.Ability1.m_OnHitActions",
+      "WeaponAbilities.Ability1.AP",
+      "WeaponAbilities.Ability2.Type",
+      "WeaponAbilities.Ability2.Mode",
+      "WeaponAbilities.Ability2.m_Ability",
+      "WeaponAbilities.Ability2.m_FXSettings",
+      "WeaponAbilities.Ability2.OnHitOverrideType",
+      "WeaponAbilities.Ability2.m_OnHitActions",
+      "WeaponAbilities.Ability2.AP",
+      "WeaponAbilities.Ability3.Type",
+      "WeaponAbilities.Ability3.Mode",
+      "WeaponAbilities.Ability3.m_Ability",
+      "WeaponAbilities.Ability3.m_FXSettings",
+      "WeaponAbilities.Ability3.OnHitOverrideType",
+      "WeaponAbilities.Ability3.m_OnHitActions",
+      "WeaponAbilities.Ability3.AP",
+      "WeaponAbilities.Ability4.Type",
+      "WeaponAbilities.Ability4.Mode",
+      "WeaponAbilities.Ability4.m_Ability",
+      "WeaponAbilities.Ability4.m_FXSettings",
+      "WeaponAbilities.Ability4.OnHitOverrideType",
+      "WeaponAbilities.Ability4.m_OnHitActions",
+      "WeaponAbilities.Ability4.AP",
+      "WeaponAbilities.Ability5.Type",
+      "WeaponAbilities.Ability5.Mode",
+      "WeaponAbilities.Ability5.m_Ability",
+      "WeaponAbilities.Ability5.m_FXSettings",
+      "WeaponAbilities.Ability5.OnHitOverrideType",
+      "WeaponAbilities.Ability5.m_OnHitActions",
+      "WeaponAbilities.Ability5.AP",
+      "m_AttackOfOpportunityAbility"
+    ],
+    "Components": [],
+    "Author": "EvgeniyShanhiev",
+    "Comment": "10 Willpower, 5 Fellowship, Emperor's Wrath 9",
+    "m_DisplayName": {
+      "m_Key": "big-choppa-v6-name",
+      "m_OwnerString": "",
+      "m_OwnerPropertyPath": "",
+      "m_JsonPath": "",
+      "Shared": null
+    },
+    "m_Description": {
+      "m_Key": "big-choppa-v6-description",
+      "m_OwnerString": "",
+      "m_OwnerPropertyPath": "",
+      "m_JsonPath": "",
+      "Shared": null
+    },
+    "m_Icon": {
+      "guid": "05cc7a97859f1f44fa4ae86ca9527c8e",
+      "fileid": 21300000
+    },
+    "m_FlavorText": {
+      "m_Key": "big-choppa-v6-flavor",
+      "m_OwnerString": "",
+      "m_OwnerPropertyPath": "",
+      "m_JsonPath": "",
+      "Shared": null
+    },
+    "m_NonIdentifiedNameText": {
+      "m_Key": "",
+      "m_OwnerString": "",
+      "m_OwnerPropertyPath": "",
+      "m_JsonPath": "",
+      "Shared": null
+    },
+    "m_NonIdentifiedDescriptionText": {
+      "m_Key": "",
+      "m_OwnerString": "",
+      "m_OwnerPropertyPath": "",
+      "m_JsonPath": "",
+      "Shared": null
+    },
+    "m_NotStackable": false,
+    "m_Weight": 0.0,
+    "m_Origin": "MeleeWeaponry",
+    "m_Rarity": "Unique",
+    "m_Tag": "None",
+    "m_IsNotable": true,
+    "m_ProfitFactorCost": 0.0,
+    "m_CargoVolumePercent": 20,
+    "m_InventoryPutSound": "UI_INV_Blunt_Put_Play",
+    "m_InventoryTakeSound": "UI_INV_Blunt_Take_Play",
+    "ToCargoAutomatically": false,
+    "ItemLevel": 55,
+    "SpendCharges": false,
+    "Charges": 1,
+    "RestoreChargesAfterCombat": false,
+    "IsNonRemovable": false,
+    "IsUnlootable": false,
+    "m_EquipmentEntity": null,
+    "m_EquipmentEntityAlternatives": [],
+    "m_ForcedRampColorPresetIndex": -1,
+    "m_VisualParameters": {
+      "m_WeaponAnimationStyle": "AxeTwoHanded",
+      "m_SpecialAnimation": "None",
+      "m_BurstAnimationDelay": 0.0,
+      "m_WeaponModel": {
+        "guid": "b88b6d0dd11f0bd49842a49328ddde70",
+        "fileid": 6647454492366625619
+      },
+      "m_WeaponBeltModelOverride": null,
+      "m_WeaponSheathModelOverride": null,
+      "m_SoundSize": "None",
+      "m_SoundType": "None",
+      "m_SoundSizeSwitch": {
+        "Value": "",
+        "Group": ""
+      },
+      "m_SoundTypeSwitch": {
+        "Value": "Blunt",
+        "Group": "ProjectileType"
+      },
+      "m_MuffledTypeSwitch": {
+        "Value": "",
+        "Group": ""
+      },
+      "m_MissSoundType": "None",
+      "m_EquipSound": "Foley_WP_M_Blunt_Equip_Play",
+      "m_UnequipSound": "Foley_WP_M_Blunt_Remove_Play",
+      "m_OutOfAmmoSound": "",
+      "m_InventoryEquipSound": "UI_INV_Blunt_Equip_Play",
+      "m_InventoryPutSound": "UI_INV_Blunt_Put_Play",
+      "m_InventoryTakeSound": "UI_INV_Blunt_Take_Play"
+    },
+    "m_OnHitActions": null,
+    "AbilityContainer": {
+      "Ability1": {
+        "Type": "SingleShot",
+        "Mode": "Default",
+        "m_Ability": "!bp_9dec1bdade284190b0977f5f70d26d3e",
+        "m_FXSettings": "!bp_5a72a93ee3bd4a049aa4ddef1e4c7f84",
+        "OnHitOverrideType": "None",
+        "m_OnHitActions": null,
+        "AP": 1
+      },
+      "Ability2": {
+        "Type": "AOE",
+        "Mode": "Default",
+        "m_Ability": "!bp_a7412fd693214091aa88c7beb83ac108",
+        "m_FXSettings": "!bp_5a72a93ee3bd4a049aa4ddef1e4c7f84",
+        "OnHitOverrideType": "None",
+        "m_OnHitActions": null,
+        "AP": 2
+      },
+      "Ability3": {
+        "Type": "AOE",
+        "Mode": "Default",
+        "m_Ability": "!bp_32f7dbda3fa847b992a69727333957f7",
+        "m_FXSettings": "!bp_5a72a93ee3bd4a049aa4ddef1e4c7f84",
+        "OnHitOverrideType": "None",
+        "m_OnHitActions": null,
+        "AP": 2
+      },
+      "Ability4": {
+        "Type": "AOE",
+        "Mode": "Default",
+        "m_Ability": "!bp_f71e42ee79d540d1963b1482ffa9cf8b",
+        "m_FXSettings": "!bp_5a72a93ee3bd4a049aa4ddef1e4c7f84",
+        "OnHitOverrideType": "None",
+        "m_OnHitActions": null,
+        "AP": 2
+      },
+      "Ability5": {
+        "Type": "SingleShot",
+        "Mode": "Default",
+        "m_Ability": "!bp_6806e82fc6694c278698ca390cad4a51",
+        "m_FXSettings": "!bp_5a72a93ee3bd4a049aa4ddef1e4c7f84",
+        "OnHitOverrideType": "None",
+        "m_OnHitActions": null,
+        "AP": 2
+      }
+    },
+    "m_AttackOfOpportunityAbility": "!bp_9dec1bdade284190b0977f5f70d26d3e",
+    "m_AttackOfOpportunityAbilityFXSettings": "!bp_0ebd832aea364e23a9aa6abc76228e2d",
+    "Category": "Melee",
+    "Family": "Primitive",
+    "Classification": "None",
+    "m_HoldingType": "TwoHanded",
+    "m_Range": "Melee",
+    "m_Heaviness": "NotHeavy",
+    "CanBeUsedInGame": true,
+    "m_TypeNameText": {
+      "m_Key": "",
+      "m_OwnerString": "",
+      "m_OwnerPropertyPath": "",
+      "m_JsonPath": "",
+      "Shared": null
+    },
+    "m_DefaultNameText": {
+      "m_Key": "",
+      "m_OwnerString": "",
+      "m_OwnerPropertyPath": "",
+      "m_JsonPath": "",
+      "Shared": null
+    },
+    "m_DescriptionText": {
+      "m_Key": "",
+      "m_OwnerString": "",
+      "m_OwnerPropertyPath": "",
+      "m_JsonPath": "",
+      "Shared": null
+    },
+    "IsTwoHanded": true,
+    "WarhammerDamage": 43,
+    "WarhammerMaxDamage": 64,
+    "WarhammerPenetration": 40,
+    "DodgePenetration": 0,
+    "AdditionalHitChance": 0,
+    "WarhammerRecoil": 0,
+    "WarhammerMaxDistance": 1,
+    "WarhammerMaxAmmo": -1,
+    "RateOfFire": 0,
+    "m_Enchantments": [],
+    "m_DamageType": {
+      "Type": "Rending"
+    },
+    "m_IsNatural": false,
+    "m_DamageStatBonusFactor": "Two"
+  },
+  "Meta": {
+    "ShadowDeleted": false
+  }
+}

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Manifest:
     UniqueName: ArmouryOrks
-    Version: 0.4.9
+    Version: 0.4.15
     DisplayName: 'Armoury: Orks! WAAAAAGH!'
     Description: Ork weapons for player use, beginning with the Choppa.
     Author: Poffl

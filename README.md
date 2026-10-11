@@ -30,17 +30,22 @@ The special abilities use dedicated base-game icons: Charge, Taunting Scream and
 ## Visuals
 
 - Original Choppa model and textures created specifically for this mod.
-- `BrutalOneHanded` animation style.
-- High roughness for a suitably worn, matte Ork-metal finish.
+- Choppa uses the `BrutalOneHanded` animation style.
+- Power Klaw uses `Fist` with three original human punch variants per hand. Its runtime patch preserves the original damage/sound event tracks and applies only to the Power Klaw blueprint.
+- Worn Ork-metal finish with restrained metallic reflections; material masks use the Owlcat/Lit channel layout.
 - Custom inventory icon.
 
 ## Installation
+
+Install and enable [MicroPatches](https://github.com/microsoftenator2022/MicroPatches/releases) first. Our development baseline is runtime version **1.21.1**, with **Load OwlMod BlueprintDirectReferences dependencies** enabled and experimental patches disabled. Use the runtime mod ZIP, not the editor installer, for the game.
 
 Download `ArmouryOrks.zip` from the latest GitHub release and add the ZIP to ModFinder. Enable **Armoury: Orks! WAAAAAGH!** and completely restart the game after installing or updating the mod.
 
 For testing or existing campaigns, add the V1 item through ToyBox by searching for **Choppa**. Blueprint ID: `9f1a0cab53be493b96989c9a672d2ae5`.
 
 ## Development
+
+Use MicroPatches as the baseline for future development and in-game validation. Preserve the existing MicroPatches editor/build integration in the local Owlcat template; check compatibility before updating it. Verify generated bundle dependencies, weapon visuals, abilities, progression, and save/load behavior in the target game version. MicroPatches 1.21.1 disables the old ability-variants action-bar fix; do not rely on that fix.
 
 The repository contains the mod-specific source assets, generated blueprints and generator/runtime code. The local Owlcat Rogue Trader mod template, extracted vanilla assets, Unity caches and build output are intentionally excluded.
 

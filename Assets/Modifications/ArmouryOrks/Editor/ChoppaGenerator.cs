@@ -136,13 +136,13 @@ namespace ArmouryOrks.Editor
         // Vanilla one-handed primitive axe; uses the BrutalOneHanded animation style.
         private const string WeaponPrototype = "b61740707f6b477f9ed139b22a81d245";
 
-        [MenuItem("Armoury Orks/Build 0.4.9 Test")]
+        [MenuItem("Armoury Orks/Build 0.4.15 Test")]
         public static void Build()
         {
             Generate();
             Modification mod = AssetDatabase.LoadAssetAtPath<Modification>(Root + "/ArmouryOrks.asset");
             if (mod == null) throw new InvalidOperationException("ArmouryOrks Modification asset was not found.");
-            mod.Manifest.Version = "0.4.9";
+            mod.Manifest.Version = "0.4.15";
             EditorUtility.SetDirty(mod);
             AssetDatabase.SaveAssets();
             var result = Builder.Build(mod);
@@ -253,7 +253,7 @@ namespace ArmouryOrks.Editor
             Texture2D metallic = LoadPng(MetallicPath, true);
             Texture2D roughness = LoadPng(RoughnessPath, true);
             Texture2D normalSource = LoadPng(NormalPath, true);
-            Texture2D mask = PackMetallicSmoothness(metallic, roughness);
+            Texture2D mask = PackOwlcatMasks(metallic, roughness);
             Texture2D normal = PackUnityNormal(normalSource);
 
             Shader shader = Shader.Find("Owlcat/Lit");
@@ -266,13 +266,13 @@ namespace ArmouryOrks.Editor
             }
             else material.shader = shader;
             SetTexture(material, baseColor, "_BaseMap", "_BaseColorMap", "_MainTex");
-            SetTexture(material, mask, "_MetallicGlossMap", "_MaskMap", "_MasksMap");
+            SetTexture(material, mask, "_MasksMap");
             SetTexture(material, normal, "_BumpMap", "_NormalMap");
-            SetFloat(material, 1f, "_Metallic");
-            SetFloat(material, 1f, "_Smoothness");
-            SetFloat(material, 0.95f, "_Roughness");
+            SetFloat(material, 0.8f, "_Metallic");
+            SetFloat(material, 0.9f, "_Roughness");
             SetColor(material, Color.white, "_BaseColor", "_Color", "_AdditionalAlbedoColor");
-            material.EnableKeyword("_METALLICSPECGLOSSMAP");
+            material.DisableKeyword("_METALLICSPECGLOSSMAP");
+            material.EnableKeyword("_MASKSMAP");
             material.EnableKeyword("_NORMALMAP");
             EditorUtility.SetDirty(material);
             AssetDatabase.SaveAssets();
@@ -287,17 +287,19 @@ namespace ArmouryOrks.Editor
             return texture;
         }
 
-        private static Texture2D PackMetallicSmoothness(Texture2D metallic, Texture2D roughness)
-            => PackMetallicSmoothness(metallic, roughness, PackedMaskPath, "Choppa_MetallicSmoothness");
+        private static Texture2D PackOwlcatMasks(Texture2D metallic, Texture2D roughness)
+            => PackOwlcatMasks(metallic, roughness, PackedMaskPath, "Choppa_MetallicSmoothness");
 
-        private static Texture2D PackMetallicSmoothness(Texture2D metallic, Texture2D roughness, string outputPath, string textureName)
+        private static Texture2D PackOwlcatMasks(Texture2D metallic, Texture2D roughness, string outputPath, string textureName)
         {
             if (metallic.width != roughness.width || metallic.height != roughness.height)
                 throw new InvalidDataException("Choppa metallic and roughness textures have different dimensions.");
             Color32[] metal = metallic.GetPixels32();
             Color32[] rough = roughness.GetPixels32();
+            // Owlcat/Lit: R = roughness, G = emission, B = metallic, A = thickness.
+            // Preserve the authored metal/non-metal regions and surface wear.
             for (int i = 0; i < metal.Length; i++)
-                metal[i] = new Color32(metal[i].r, 0, 0, (byte)(255 - rough[i].r));
+                metal[i] = new Color32(rough[i].r, 0, metal[i].r, 0);
             Texture2D packed = new Texture2D(metallic.width, metallic.height, TextureFormat.RGBA32, true, true)
                 { name = textureName };
             packed.SetPixels32(metal);
@@ -510,7 +512,7 @@ namespace ArmouryOrks.Editor
             Texture2D metallic = LoadPng(BigChoppaMetallicPath, true);
             Texture2D roughness = LoadPng(BigChoppaRoughnessPath, true);
             Texture2D normalSource = LoadPng(BigChoppaNormalPath, true);
-            Texture2D mask = PackMetallicSmoothness(metallic, roughness, BigChoppaPackedMaskPath, "BigChoppa_MetallicSmoothness");
+            Texture2D mask = PackOwlcatMasks(metallic, roughness, BigChoppaPackedMaskPath, "BigChoppa_MetallicSmoothness");
             Texture2D normal = PackUnityNormal(normalSource, BigChoppaPackedNormalPath, "BigChoppa_Normal");
 
             Shader shader = Shader.Find("Owlcat/Lit");
@@ -523,13 +525,13 @@ namespace ArmouryOrks.Editor
             }
             else material.shader = shader;
             SetTexture(material, baseColor, "_BaseMap", "_BaseColorMap", "_MainTex");
-            SetTexture(material, mask, "_MetallicGlossMap", "_MaskMap", "_MasksMap");
+            SetTexture(material, mask, "_MasksMap");
             SetTexture(material, normal, "_BumpMap", "_NormalMap");
-            SetFloat(material, 1f, "_Metallic");
-            SetFloat(material, 1f, "_Smoothness");
-            SetFloat(material, 0.95f, "_Roughness");
+            SetFloat(material, 0.8f, "_Metallic");
+            SetFloat(material, 0.9f, "_Roughness");
             SetColor(material, Color.white, "_BaseColor", "_Color", "_AdditionalAlbedoColor");
-            material.EnableKeyword("_METALLICSPECGLOSSMAP");
+            material.DisableKeyword("_METALLICSPECGLOSSMAP");
+            material.EnableKeyword("_MASKSMAP");
             material.EnableKeyword("_NORMALMAP");
             EditorUtility.SetDirty(material);
             AssetDatabase.SaveAssets();
@@ -569,11 +571,11 @@ namespace ArmouryOrks.Editor
             // Pull the cuff over the hand and forearm. The source pivot sits in the centre of
             // the complete claw, so the first visual test otherwise leaves it hanging below.
             model.transform.localPosition = new Vector3(0.08f, 0.16f, 0.12f);
-            // Roll around the claw's own long axis so the cuff follows the forearm without
-            // changing the downward fist attack direction.
+            // Keep the accepted fore/aft pitch. Lean around the model-local cross axis,
+            // not the socket axis, so the cuff turns towards the arm.
             model.transform.localRotation = Quaternion.Euler(270f, 0f, 0f)
-                * Quaternion.AngleAxis(360f, Vector3.up)
-                * Quaternion.AngleAxis(-60f, Vector3.right);
+                * Quaternion.AngleAxis(-60f, Vector3.right)
+                * Quaternion.AngleAxis(20f, Vector3.forward);
             model.transform.localScale = Vector3.one * 85f;
             foreach (Renderer renderer in model.GetComponentsInChildren<Renderer>(true))
                 renderer.sharedMaterial = material;
@@ -606,7 +608,7 @@ namespace ArmouryOrks.Editor
             Texture2D metallic = LoadPng(PowerKlawMetallicPath, true);
             Texture2D roughness = LoadPng(PowerKlawRoughnessPath, true);
             Texture2D normalSource = LoadPng(PowerKlawNormalPath, true);
-            Texture2D mask = PackMetallicSmoothness(metallic, roughness, PowerKlawPackedMaskPath, "PowerKlaw_MetallicSmoothness");
+            Texture2D mask = PackOwlcatMasks(metallic, roughness, PowerKlawPackedMaskPath, "PowerKlaw_MetallicSmoothness");
             Texture2D normal = PackUnityNormal(normalSource, PowerKlawPackedNormalPath, "PowerKlaw_Normal");
             Shader shader = Shader.Find("Owlcat/Lit");
             if (shader == null) throw new InvalidOperationException("Owlcat/Lit is unavailable.");
@@ -618,13 +620,13 @@ namespace ArmouryOrks.Editor
             }
             else material.shader = shader;
             SetTexture(material, baseColor, "_BaseMap", "_BaseColorMap", "_MainTex");
-            SetTexture(material, mask, "_MetallicGlossMap", "_MaskMap", "_MasksMap");
+            SetTexture(material, mask, "_MasksMap");
             SetTexture(material, normal, "_BumpMap", "_NormalMap");
-            SetFloat(material, 1f, "_Metallic");
-            SetFloat(material, 1f, "_Smoothness");
-            SetFloat(material, 0.71f, "_Roughness");
+            SetFloat(material, 0.8f, "_Metallic");
+            SetFloat(material, 0.68f, "_Roughness");
             SetColor(material, Color.white, "_BaseColor", "_Color", "_AdditionalAlbedoColor");
-            material.EnableKeyword("_METALLICSPECGLOSSMAP");
+            material.DisableKeyword("_METALLICSPECGLOSSMAP");
+            material.EnableKeyword("_MASKSMAP");
             material.EnableKeyword("_NORMALMAP");
             EditorUtility.SetDirty(material);
             AssetDatabase.SaveAssets();
@@ -643,6 +645,7 @@ namespace ArmouryOrks.Editor
             AddOverride(weapon, "m_Icon");
             weapon["Data"]["m_VisualParameters"]["m_WeaponModel"] = UnityReference(prefabGuid, prefabFileId);
             AddOverride(weapon, "m_VisualParameters.m_WeaponModel");
+            // Runtime supplies the original human fist clips for this weapon.
             weapon["Data"]["m_VisualParameters"]["m_WeaponAnimationStyle"] = "Fist";
             AddOverride(weapon, "m_VisualParameters.m_WeaponAnimationStyle");
             Override(weapon, "Family", "Primitive");
@@ -1252,7 +1255,7 @@ namespace ArmouryOrks.Editor
             strings["big-choppa-cleave-name"] = Entry("Cleave");
             strings["big-choppa-cleave-description"] = Entry("Swing the Big Choppa through the three tiles directly in front of the wielder. Cost: 2 AP.");
             strings["power-klaw-v1-name"] = Entry("Power Klaw");
-            strings["power-klaw-v1-description"] = Entry("A roaring mechanical claw built from pistons, scavenged armour plate and the Ork conviction that anything worth grabbing is worth crushing.\n\n• Test version V1\n• Damage: 14-24\n• Armour penetration: 30%\n• Fist attack animations");
+            strings["power-klaw-v1-description"] = Entry("A roaring mechanical claw built from pistons, scavenged armour plate and the Ork conviction that anything worth grabbing is worth crushing.\n\n• Test version V1\n• Damage: 14-24\n• Armour penetration: 30%\n• Original human fist attack animations");
             strings["power-klaw-v1-flavor"] = Entry("'Grab it. Squeeze it. If it stops movin', squeeze da next one.'");
             JObject document = new JObject
             {

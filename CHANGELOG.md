@@ -1,5 +1,38 @@
 # Changelog
 
+## 0.4.15 — 2026-10-11
+
+- Power Klaw uses original human main-hand/off-hand fist attack clips, including their original damage and sound event tracks, through a weapon-scoped runtime patch.
+- Preserved the accepted model orientation, fit and materials. Both attack abilities were confirmed working in-game by the user. Claws remain rigid by design.
+
+## 0.4.14 — 2026-10-11
+
+- Replaced the Power Klaw Fist animation style with BrutalOneHanded. The human main-hand attack animation set reports no animation for Fist; the replacement uses the existing heavy one-handed melee set.
+- Preserved the accepted claw prefab orientation and updated the weapon description. In-game attack verification remains pending.
+
+
+## 0.4.13 — 2026-10-11
+
+- Kept the accepted Power Klaw fore/aft pitch and moved the 20-degree lateral adjustment from socket space to model-local space. In-game fit verification remains pending.
+
+
+## 0.4.12 — 2026-10-11
+
+- Reverted the Power Klaw forward pitch adjustment from 0.4.11 and applied a separate 20-degree lateral lean in weapon-socket space. In-game fit verification remains pending.
+
+
+## 0.4.11 — 2026-10-11
+
+- Tilted the Power Klaw visual by 25 degrees relative to the previous test pose to better align the cuff opening with the forearm. In-game fit verification remains pending.
+
+
+## 0.4.10 — 2026-10-11
+
+- Corrected Choppa, Big Choppa and Power Klaw material masks for Owlcat/Lit: roughness in red, metallic in blue, with emission and thickness disabled.
+- Restored metallic reflections in the authored metal regions using a restrained metallic multiplier of 0.8.
+- Slightly reduced roughness: Choppa and Big Choppa from 0.95 to 0.90; Power Klaw from 0.71 to 0.68.
+
+
 ## 0.1.2 — 2026-08-29
 
 First completed Choppa release.

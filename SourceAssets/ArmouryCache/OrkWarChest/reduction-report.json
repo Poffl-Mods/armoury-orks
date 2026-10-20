@@ -1,5 +1,4 @@
 {
-  "source_fbx": "Meshy_AI_Orc_War_Chest_1020191842_texture.fbx",
   "source_sha256": "50026d9a49f8dfb1f6631f402c099052a0709513048c2339b2b64c0aaa809538",
   "original_triangles": 739366,
   "reduced_triangles": 40000,
@@ -27,5 +26,6 @@
     "cage_extrusion": 0.008,
     "max_ray_distance": 0.025,
     "margin": 12
-  }
+  },
+  "source_asset": "OrkWarChest_Source"
 }

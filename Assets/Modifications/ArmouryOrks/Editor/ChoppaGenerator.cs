@@ -471,7 +471,7 @@ namespace ArmouryOrks.Editor
             model.transform.localPosition = new Vector3(0.335f, 0.265f, 0.02f);
             model.transform.localRotation = Quaternion.Euler(0f, 0f, 225f)
                 * Quaternion.AngleAxis(150f, Vector3.right);
-            // The FBX is already 30% larger than the regular Choppa. Use the same Meshy-to-game
+            // The FBX is already 30% larger than the regular Choppa. Use the same source-to-game
             // conversion as that weapon so the size increase is applied only once.
             model.transform.localScale = Vector3.one * 54.4f;
             // The doll-room attachment path can rebuild/reset prefab transforms. Bake the small
@@ -629,7 +629,7 @@ namespace ArmouryOrks.Editor
             GameObject model = UnityEngine.Object.Instantiate(fbx);
             model.name = "PowerKlaw_FBX_Model";
             model.transform.SetParent(visual.transform, false);
-            // Meshy authored the claw around its geometric centre. Move the rear quarter to the
+            // The source model places the claw around its geometric centre. Move the rear quarter to the
             // hand socket and keep a deliberately oversized, but still human-rig-compatible scale.
             // Pull the cuff over the hand and forearm. The source pivot sits in the centre of
             // the complete claw, so the first visual test otherwise leaves it hanging below.

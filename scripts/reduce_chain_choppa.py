@@ -1,4 +1,4 @@
-"""Rebuild the 60k Chain Choppa directly from the original Meshy FBX.
+"""Rebuild the 60k Chain Choppa directly from the original source FBX.
 
 Run: blender --background --python scripts/reduce_chain_choppa.py -- /path/to/original.fbx
 The original FBX and the previous 25k source remain untouched.

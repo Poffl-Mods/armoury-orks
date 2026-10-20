@@ -2,14 +2,16 @@
 
 ## 1.0.0 — 2026-10-20
 
+- Use consistent Ork War Chest names for authoring folders, reference files, internal scene objects and source metadata. Saved blueprint and prefab identities are unchanged.
+
 - First full release: Choppa, Big Choppa, Power Klaw and Chain Choppa, six tiers each, automatic progression and English Ork-themed abilities.
-- Includes the persistent DA LOOT BOX armoury cache with the accepted 40,000-triangle Meshy chest, updated weapon materials and the tested Chain Choppa/Crushing Assault fixes.
+- Includes the persistent DA LOOT BOX armoury cache with the accepted 40,000-triangle Ork War Chest, updated weapon materials and the tested Chain Choppa/Crushing Assault fixes.
 - Separate Windows 64-bit and macOS packages, with platform-specific Unity AssetBundle validation and SHA-256 checksums. Windows in-game verification remains pending; macOS pre-release gameplay and visuals were accepted by the user.
 - Added platform installation notes and release-build entry points. Preserve Unity reference metadata in source control and keep historical-release regression checks optional for fresh clones.
 
 ## 0.7.2 — 2026-10-20
 
-- Replaced the placeholder cache geometry with the user-provided Meshy Ork War Chest, reduced from 739,366 to 40,000 triangles (94.59% fewer). Reprojected all PBR channels, including a high-to-low normal bake, to retain surface detail without UV distortion.
+- Replaced the placeholder cache geometry with the user-provided Ork War Chest, reduced from 739,366 to 40,000 triangles (94.59% fewer). Reprojected all PBR channels, including a high-to-low normal bake, to retain surface detail without UV distortion.
 - Kept 2K textures and adapted the materials to Owlcat/Lit. Scaled the closed model to 1.02 m wide, grounded its origin and fitted the loot collider to its bounds.
 - Preserved cache blueprint/prefab identity, unique ID, position, interaction and saved contents; no refilling or replacement of the saved entity. Weapon visuals and balance remain as in 0.7.1.
 - Added reproducible Blender preparation script, reduced editable source, previews and source hash/report. Supplied original files remain untouched. In-game appearance and interaction still require verification.

@@ -85,7 +85,7 @@ namespace ArmouryOrks.Editor
             const string modelPath = Art + "/OrkChest.fbx";
             AssetDatabase.ImportAsset(modelPath, ImportAssetOptions.ForceSynchronousImport);
             var importer = AssetImporter.GetAtPath(modelPath) as ModelImporter;
-            if (importer == null) throw new InvalidDataException("Reduced Meshy chest FBX is missing.");
+            if (importer == null) throw new InvalidDataException("Reduced Ork War Chest FBX is missing.");
             importer.meshCompression = ModelImporterMeshCompression.Off;
             importer.importNormals = ModelImporterNormals.Import;
             importer.importTangents = ModelImporterTangents.CalculateMikk;
@@ -98,7 +98,7 @@ namespace ArmouryOrks.Editor
             importer.SaveAndReimport();
             var source = AssetDatabase.LoadAssetAtPath<GameObject>(modelPath);
             GameObject model = UnityEngine.Object.Instantiate(source);
-            model.name = "OrkChest_Meshy_40k";
+            model.name = "OrkWarChest_40k";
             model.transform.SetParent(root.transform, false);
             // Blender's -Y front imports as Unity +Z; retain the old cache's -Z front.
             model.transform.localRotation = Quaternion.Euler(0f, 180f, 0f) * model.transform.localRotation;
@@ -120,7 +120,7 @@ namespace ArmouryOrks.Editor
                 throw new InvalidDataException($"Ork chest import mismatch: {triangles} triangles, bounds {bounds}.");
             collider.center = bounds.center;
             collider.size = bounds.size + new Vector3(.02f, .02f, .02f);
-            Debug.Log($"[ArmouryOrks] Reduced Meshy chest: {triangles} triangles, bounds {bounds}; native saved cache identity retained.");
+            Debug.Log($"[ArmouryOrks] Reduced Ork War Chest: {triangles} triangles, bounds {bounds}; native saved cache identity retained.");
         }
 
         private static Material CreateOrkChestMaterial()

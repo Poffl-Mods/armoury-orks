@@ -1,6 +1,6 @@
-"""Reduce the original Meshy chest, bake high-poly detail and export the game mesh.
+"""Reduce the original Ork War Chest, bake high-poly detail and export the game mesh.
 
-Run: blender --background --python scripts/prepare_ork_chest.py -- /path/to/Meshy_folder
+Run: blender --background --python scripts/prepare_ork_chest.py -- /path/to/source_chest_folder
 Original input files remain untouched. Outputs retain the input UV layout and 2K maps.
 """
 from pathlib import Path
@@ -13,7 +13,7 @@ from mathutils import Vector
 
 ROOT = Path(__file__).resolve().parents[1]
 ART = ROOT / 'Assets/Modifications/ArmouryOrks/Art'
-SOURCE = ROOT / 'SourceAssets/ArmouryCache/Meshy'
+SOURCE = ROOT / 'SourceAssets/ArmouryCache/OrkWarChest'
 SOURCE.mkdir(parents=True, exist_ok=True)
 INPUT = Path(sys.argv[sys.argv.index('--') + 1])
 FBX = next(INPUT.glob('*.fbx'))
@@ -21,7 +21,7 @@ TARGET = 40000
 bpy.ops.object.select_all(action='SELECT'); bpy.ops.object.delete(use_global=False)
 bpy.ops.import_scene.fbx(filepath=str(FBX))
 meshes = [o for o in bpy.context.selected_objects if o.type == 'MESH']
-if len(meshes) != 1: raise RuntimeError('Expected the single Meshy chest mesh.')
+if len(meshes) != 1: raise RuntimeError('Expected the single Ork War Chest mesh.')
 high = meshes[0]
 high.name = 'OrkChest_Original_High'
 original_triangles = sum(len(p.vertices)-2 for p in high.data.polygons)
@@ -96,9 +96,13 @@ for direction,energy in [((1,-2,3),500),((-2,1,2),500)]:
     bpy.ops.object.light_add(type='AREA',location=center+Vector(direction)*span);lamp=bpy.context.object;lamp.data.energy=energy*span*span;lamp.data.shape='DISK';lamp.data.size=span*3;lamp.rotation_euler=(center-lamp.location).to_track_quat('-Z','Y').to_euler()
 for name,direction in [('Front',(1,-2,1.3)),('Back',(-1,2,1.3))]:
     camera.location=center+Vector(direction)*span*2;camera.rotation_euler=(center-camera.location).to_track_quat('-Z','Y').to_euler();scene.render.filepath=str(SOURCE/('OrkChest_40k_'+name+'.png'));bpy.ops.render.render(write_still=True)
-report={'source_fbx':FBX.name,'source_sha256':hashlib.sha256(FBX.read_bytes()).hexdigest(),'original_triangles':original_triangles,'reduced_triangles':triangles,'reduction_percent':round((1-triangles/original_triangles)*100,2),'dimensions_metres_blender_xyz':list(low.dimensions),'front_axis_blender':'-Y','unity_front_correction_degrees':180,'texture_size':[2048,2048],'uv_layers':len(low.data.uv_layers),'pbr_reprojection':['BaseColor','Metallic','Roughness','Normal'],'normal_bake':{'selected_to_active':True,'cage_extrusion':.008,'max_ray_distance':.025,'margin':12}}
+report={'source_asset':'OrkWarChest_Source','source_sha256':hashlib.sha256(FBX.read_bytes()).hexdigest(),'original_triangles':original_triangles,'reduced_triangles':triangles,'reduction_percent':round((1-triangles/original_triangles)*100,2),'dimensions_metres_blender_xyz':list(low.dimensions),'front_axis_blender':'-Y','unity_front_correction_degrees':180,'texture_size':[2048,2048],'uv_layers':len(low.data.uv_layers),'pbr_reprojection':['BaseColor','Metallic','Roughness','Normal'],'normal_bake':{'selected_to_active':True,'cage_extrusion':.008,'max_ray_distance':.025,'margin':12}}
 (SOURCE/'reduction-report.json').write_text(json.dumps(report,indent=2))
 # Pack source textures so the reduced Blender file survives moving the repository.
+bpy.data.orphans_purge(do_recursive=True)
+for source_image in bpy.data.images:
+    if source_image.source=='FILE' and source_image.filepath:
+        source_image.filepath=bpy.path.relpath(source_image.filepath,start=str(SOURCE))
 bpy.ops.file.pack_all();bpy.context.preferences.filepaths.save_version=0
 bpy.ops.wm.save_as_mainfile(filepath=str(SOURCE/'OrkChest_40k.blend'))
 print('CHEST_REDUCED',json.dumps(report),flush=True)

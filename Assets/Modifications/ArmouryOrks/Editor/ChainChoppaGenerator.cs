@@ -59,7 +59,7 @@ namespace ArmouryOrks.Editor
                 GameObject model = UnityEngine.Object.Instantiate(fbx);
                 model.name = "ChainChoppa_FBX_Model";
                 // This FBX is authored in metres with the grip at zero. Retain Unity's
-                // imported basis/unit conversion instead of applying the older Meshy scale.
+                // imported basis/unit conversion instead of applying the older source scale.
                 model.transform.SetParent(root.transform, false);
                 Material material = CreateChainChoppaMaterial();
                 Bounds bounds = new Bounds();

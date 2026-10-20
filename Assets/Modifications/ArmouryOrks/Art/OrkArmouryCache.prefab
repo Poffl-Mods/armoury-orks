@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8625184081225454147}
   - component: {fileID: 2744646517763465896}
   m_Layer: 0
-  m_Name: OrkChest_Meshy_40k
+  m_Name: OrkWarChest_40k
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -8,7 +8,7 @@ ChainChoppa_25k.fbx: reduziertes Modell mit UVs und Material.
 ChainChoppa_25k.blend: bearbeitbare Szene mit Vorschau-Beleuchtung.
 Texturen für Import: BaseColor, Metallic, Roughness und Normal_Baked.
 Normal_Baked: 2048x2048, vom Original inklusive Oberflächennormalen auf das reduzierte Modell übertragen.
-Normal_Source: unveränderte Normal-Textur des Meshy-Originals, nur als Referenz.
+Normal_Source: unveränderte Normal-Textur des Originalmodells, nur als Referenz.
 Original_Front / Optimized_Front / Optimized_Back: gerenderte Vergleichsansichten.
 
 Das Original im Downloads-Ordner wurde nicht verändert. Ausrichtung, Maßstab und Ursprung des importierten Modells wurden beibehalten.

@@ -15,13 +15,13 @@ Download the package matching your operating system from [GitHub Releases](https
 
 The packages contain platform-specific Unity AssetBundles. Use only one package; do not mix the Windows and macOS bundles. GitHub's automatic source-code archives are not installable mod packages.
 
-The placeholder cache model is replaced by the user's Meshy Ork War Chest, reduced from 739,366 to 40,000 triangles (94.59% fewer). Colour, metallic, roughness and tangent-space normal detail are reprojected from the original high-resolution mesh onto the reduced model, retaining 2K textures. The closed static model is approximately 1.02 m wide, 0.70 m deep and 0.58 m high; its collider follows the imported bounds.
+The placeholder cache model is replaced by the user's Ork War Chest, reduced from 739,366 to 40,000 triangles (94.59% fewer). Colour, metallic, roughness and tangent-space normal detail are reprojected from the original high-resolution mesh onto the reduced model, retaining 2K textures. The closed static model is approximately 1.02 m wide, 0.70 m deep and 0.58 m high; its collider follows the imported bounds.
 
 The cache blueprint, prefab identity, root unique ID, location, loot interaction and finite saved contents are retained, so existing caches use the new appearance after restarting/loading without being reseeded. The user confirmed the new appearance in-game on macOS. Exhaustive save/load and combat edge cases remain additional checks.
 
 Choppa, Big Choppa and Chain Choppa use a roughness multiplier of 0.62 (previously 0.90), and Power Klaw uses 0.50 (previously 0.68). All four weapons use a metallic multiplier of 0.90 (previously 0.80). Original surface masks, colours and normal maps are retained, so wear and non-metal regions stay distinct. Final appearance depends on in-game lighting.
 
-Find **DA LOOT BOX** in the **Warrant Chamber** aboard the voidship, near the Custodes armoury cache when both mods are installed. It contains one Choppa, Big Choppa, Power Klaw and Chain Choppa. The chest works independently of Adeptus Custodes and other armoury mods; its model is generated from our Ork chest concept with Meshy and its materials are adapted to Owlcat/Lit.
+Find **DA LOOT BOX** in the **Warrant Chamber** aboard the voidship, near the Custodes armoury cache when both mods are installed. It contains one Choppa, Big Choppa, Power Klaw and Chain Choppa. The chest works independently of Adeptus Custodes and other armoury mods; its model is generated from our AI-assisted Ork chest concept and its materials are adapted to Owlcat/Lit.
 
 The cache is a native, persistent loot container: it also appears in existing campaigns when entering/loading the Warrant Chamber, and does not refill after looting, saving/loading or leaving and returning. The four weapons use the existing automatic party-level progression. ToyBox is optional.
 
@@ -133,7 +133,7 @@ Run `python3 -m unittest discover -s tests -v` to check the generated Power Klaw
 
 The Chain Choppa game FBX and inventory icon can be reproduced from `SourceAssets/ChainChoppa/ChainChoppa_60k.blend` with `blender --background --python scripts/prepare_chain_choppa.py`.
 
-The Meshy chest can be rebuilt with `blender --background --python scripts/prepare_ork_chest.py -- /path/to/Meshy_folder`. The reduced editable source, comparison previews, original texture copies and reduction report are in `SourceAssets/ArmouryCache/Meshy/`. The original supplied FBX is not modified.
+The Ork War Chest can be rebuilt with `blender --background --python scripts/prepare_ork_chest.py -- /path/to/source_chest_folder`. The reduced editable source, comparison previews, original texture copies and reduction report are in `SourceAssets/ArmouryCache/OrkWarChest/`. The original supplied FBX is not modified.
 
 ## Building release packages
 

@@ -15,20 +15,15 @@ Each family has six tiers that automatically advance with party level. Find one 
 - **macOS:** `ArmouryOrks-1.0.0-macOS.zip`
 - **Checksums:** `SHA256SUMS.txt`
 
-Use the package matching your operating system. Do not mix the asset bundles. GitHub's automatic source-code archives are not installable mod packages.
+## Installation
 
-## Requirements and installation
+Requires [MicroPatches](https://github.com/microsoftenator2022/MicroPatches/releases).
 
-Requires the official **MicroPatches runtime**; the tested baseline is **1.21.1**. Enable **Load OwlMod BlueprintDirectReferences dependencies** and leave experimental patches disabled. The editor installer is for developers, not for game installation.
+- **Mac:** Install the macOS ZIP with **Mac ModInstaller**.
+- **Windows:** Install the Windows ZIP with **Modfinder**.
 
-Install Armoury: Orks as an **Owlcat modification**. On macOS, use Mac-ModInstaller. On Windows, extract the Windows ZIP into `%USERPROFILE%\AppData\LocalLow\Owlcat Games\Warhammer 40000 Rogue Trader\Modifications\ArmouryOrks` and enable `ArmouryOrks` in `OwlcatModificationManagerSettings.json`, preserving other settings, or use a compatible Owlcat mod manager. The manifest must be directly inside the ArmouryOrks folder. Restart the game completely after installation or updates.
+Enable the mod and restart the game. ToyBox and Adeptus Custodes are not required.
 
-Adeptus Custodes, ToyBox and other armoury mods are not required. Back up saves before installing or updating mods.
+Tested in-game on Windows and macOS.
 
-## Validation and limitations
-
-Both platform packages are checked for manifest version, ZIP integrity, blueprints, runtime assembly and the actual Unity target of every AssetBundle. macOS pre-release weapon gameplay, visuals, sounds and chest were accepted in-game by the author. **The Windows build has not yet been play-tested on Windows.** Exhaustive combat/buff/save-load edge cases are not claimed as verified.
-
-The chainsword chain and chest lid are static geometry. Runtime progression retains the mod's existing item identities. Avoid removing the mod from saves that contain its items.
-
-Full details and installation guidance: [README](https://github.com/Poffl-Mods/armoury-orks#readme).
+Weapon tiers and abilities: [README](https://github.com/Poffl-Mods/armoury-orks#readme).

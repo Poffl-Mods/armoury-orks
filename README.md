@@ -24,6 +24,25 @@ Requires [MicroPatches](https://github.com/microsoftenator2022/MicroPatches/rele
 
 Enable the mod and restart the game.
 
+## Big Choppa
+
+A massive two-handed Ork blade with six automatically upgrading tiers.
+
+| Variant | Levels | Damage | Armour penetration | New abilities |
+| --- | ---: | ---: | ---: | --- |
+| Big Choppa | 1–15 | 12–21 | 25% | Strike, Cleave, BIG SWING! |
+| Sharp Big Choppa | 16–25 | 15–26 | 25% | — |
+| 'Urty Big Choppa | 26–35 | 21–30 | 30% | SPIN TA WIN! |
+| Killy Big Choppa | 36–43 | 32–45 | 30% | — |
+| Dead Killy Big Choppa | 44–49 | 37–56 | 35% | DA BIGGEST BONK! |
+| Da Biggest Choppa | 50–55 | 43–64 | 40% | — |
+
+- **Strike** — a standard single-target attack, 1 AP.
+- **Cleave** — strikes the three tiles in front of the wielder, 2 AP.
+- **BIG SWING!** — sweeps a broad arc for 110% weapon damage and pushes targets back one cell. The wielder suffers −10% parry and dodge for one round. Costs 2 AP.
+- **SPIN TA WIN!** — strikes nearby enemies for 100% weapon damage and pushes them back one cell. The wielder suffers −20 Weapon Skill and dodge for one round. Costs 2 AP, with a three-round cooldown.
+- **DA BIGGEST BONK!** — a single-target attack for 300% weapon damage that can critically hit. Afterwards, the wielder falls prone for one round. Costs 2 AP, usable once per combat.
+
 ## Chain Choppa
 
 Six tiers with chaotic special attacks. A powerful motor, sharp teeth and the occasional mishap.

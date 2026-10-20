@@ -31,6 +31,23 @@ namespace ArmouryOrks.Runtime
             "1a1602ca54e04a0b8231434b100dd175", "43d65e58f04c4ea580076b00f89b7ab0"
         };
 
+        private static readonly string[] PowerKlawGuids =
+        {
+            "89d3b9e7c7134f7f94c36518212b8596", "9ffb3db35be843a1a18cfcac2d90581a",
+            "a7e3c400849846d1b5436136acc15319", "601279edb9554f70b608c135fc44cfbf",
+            "9876491339ca4a60bd0419ceac6c80ec", "218bd6f72ed845768d0e9a52e5d2073f"
+        };
+
+        private static readonly string[] ChainChoppaGuids =
+        {
+            "fabce84f9db74c7b8fdb024b191491be",
+            "72f312ef3be22fb1f5b0627abd773ae9",
+            "843635dbc15aca212327825426b20ed2",
+            "584c60c7745d002e85a66aba123b701e",
+            "cf485f64f9cf98bb894f26e586387bcc",
+            "32cc23dc06f570f61c025bc2888fc4f0",
+        };
+
         private static readonly MethodInfo SubscribeGlobalMethod = typeof(EventBus).GetMethod(
             "SubscribeGlobal", BindingFlags.Static | BindingFlags.NonPublic);
         private static readonly MethodInfo UnsubscribeGlobalMethod = typeof(EventBus).GetMethod(
@@ -152,6 +169,8 @@ namespace ArmouryOrks.Runtime
             string guid = item.Blueprint.AssetGuid.ToString();
             if (Array.IndexOf(ChoppaGuids, guid) >= 0) TryUpgradeItemInSeries(item, targetTier, ChoppaGuids, "Choppa");
             else if (Array.IndexOf(BigChoppaGuids, guid) >= 0) TryUpgradeItemInSeries(item, targetTier, BigChoppaGuids, "Big Choppa");
+            else if (Array.IndexOf(ChainChoppaGuids, guid) >= 0) TryUpgradeItemInSeries(item, targetTier, ChainChoppaGuids, "Chain Choppa");
+            else if (Array.IndexOf(PowerKlawGuids, guid) >= 0) TryUpgradeItemInSeries(item, targetTier, PowerKlawGuids, "Power Klaw");
         }
 
         private void TryUpgradeItemInSeries(ItemEntity item, int targetTier, string[] series, string weaponName)

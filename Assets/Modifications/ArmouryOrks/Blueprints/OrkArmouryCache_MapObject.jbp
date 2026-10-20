@@ -1,0 +1,33 @@
+{
+  "AssetId": "f73bd67747f24b429b96c138ea280a63",
+  "Data": {
+    "$type": "b7d695389bff6604ca37f190a61f05b5, BlueprintDynamicMapObject",
+    "PrototypeLink": "",
+    "m_Overrides": [],
+    "Components": [],
+    "Author": "Poffl",
+    "Comment": "Persistent Ork armoury cache in the Warrant Chamber.",
+    "m_DisplayName": {
+      "m_Key": "ork-cache-name",
+      "m_OwnerString": "",
+      "m_OwnerPropertyPath": "",
+      "m_JsonPath": "",
+      "Shared": null
+    },
+    "m_Description": {
+      "m_Key": "ork-cache-description",
+      "m_OwnerString": "",
+      "m_OwnerPropertyPath": "",
+      "m_JsonPath": "",
+      "Shared": null
+    },
+    "m_Icon": null,
+    "Prefab": {
+      "guid": "4dfd6f428a19c408495bd5acf94360c4",
+      "fileid": 3045313668108465666
+    }
+  },
+  "Meta": {
+    "ShadowDeleted": false
+  }
+}

@@ -2,21 +2,32 @@
   "AssetId": "43d65e58f04c4ea580076b00f89b7ab0",
   "Data": {
     "$type": "c00f723cccf2d314198c42a572c631fd, BlueprintItemWeapon",
-    "PrototypeLink": "993996a4c0a24463aa400b9441d4caa8",
+    "PrototypeLink": "88863b6b0c61404b96b01c2bc648ba5e",
     "m_Overrides": [
+      "Author",
+      "Comment",
       "m_DisplayName",
       "m_Description",
+      "m_CargoVolumePercent",
+      "m_InventoryPutSound",
+      "m_InventoryTakeSound",
+      "AbilityContainer",
+      "m_AttackOfOpportunityAbility",
+      "m_AttackOfOpportunityAbilityFXSettings",
+      "Classification",
+      "WarhammerDamage",
+      "WarhammerMaxDamage",
+      "WarhammerPenetration",
+      "m_DamageType",
+      "Components",
+      "m_VisualParameters",
       "m_FlavorText",
       "m_Icon",
       "m_VisualParameters.m_WeaponModel",
       "m_VisualParameters.m_WeaponAnimationStyle",
       "Family",
-      "Classification",
       "m_HoldingType",
       "IsTwoHanded",
-      "WarhammerDamage",
-      "WarhammerMaxDamage",
-      "WarhammerPenetration",
       "ItemLevel",
       "m_Enchantments",
       "m_Rarity",
@@ -24,7 +35,6 @@
       "IsUnlootable",
       "IsNonRemovable",
       "m_IsNotable",
-      "m_DamageType",
       "WeaponAbilities.Ability1.Type",
       "WeaponAbilities.Ability1.Mode",
       "WeaponAbilities.Ability1.m_Ability",
@@ -59,8 +69,7 @@
       "WeaponAbilities.Ability5.m_FXSettings",
       "WeaponAbilities.Ability5.OnHitOverrideType",
       "WeaponAbilities.Ability5.m_OnHitActions",
-      "WeaponAbilities.Ability5.AP",
-      "m_AttackOfOpportunityAbility"
+      "WeaponAbilities.Ability5.AP"
     ],
     "Components": [],
     "Author": "EvgeniyShanhiev",
@@ -125,12 +134,12 @@
     "m_EquipmentEntityAlternatives": [],
     "m_ForcedRampColorPresetIndex": -1,
     "m_VisualParameters": {
-      "m_WeaponAnimationStyle": "AxeTwoHanded",
+      "m_WeaponAnimationStyle": "BrutalTwoHanded",
       "m_SpecialAnimation": "None",
       "m_BurstAnimationDelay": 0.0,
       "m_WeaponModel": {
-        "guid": "b88b6d0dd11f0bd49842a49328ddde70",
-        "fileid": 6647454492366625619
+        "guid": "5e02c1926413347eaacb4e097bd27281",
+        "fileid": 795786388296296447
       },
       "m_WeaponBeltModelOverride": null,
       "m_WeaponSheathModelOverride": null,
@@ -141,7 +150,7 @@
         "Group": ""
       },
       "m_SoundTypeSwitch": {
-        "Value": "Blunt",
+        "Value": "Sharp",
         "Group": "ProjectileType"
       },
       "m_MuffledTypeSwitch": {
@@ -149,12 +158,12 @@
         "Group": ""
       },
       "m_MissSoundType": "None",
-      "m_EquipSound": "Foley_WP_M_Blunt_Equip_Play",
-      "m_UnequipSound": "Foley_WP_M_Blunt_Remove_Play",
+      "m_EquipSound": "Foley_WP_M_Sword_Equip_Play",
+      "m_UnequipSound": "Foley_WP_M_Sword_Remove_Play",
       "m_OutOfAmmoSound": "",
-      "m_InventoryEquipSound": "UI_INV_Blunt_Equip_Play",
-      "m_InventoryPutSound": "UI_INV_Blunt_Put_Play",
-      "m_InventoryTakeSound": "UI_INV_Blunt_Take_Play"
+      "m_InventoryEquipSound": "UI_INV_SharpSword_Equip_Play",
+      "m_InventoryPutSound": "UI_INV_SharpSword_Put_Play",
+      "m_InventoryTakeSound": "UI_INV_SharpSword_Take_Play"
     },
     "m_OnHitActions": null,
     "AbilityContainer": {

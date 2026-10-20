@@ -17,7 +17,15 @@ namespace ArmouryOrks.Runtime
     // wrappers (including Act/damage and sound tracks), rather than cloning clips.
     public static class PowerKlawFistAnimations
     {
-        private const string WeaponGuid = "89d3b9e7c7134f7f94c36518212b8596";
+        private static readonly HashSet<string> WeaponGuids = new HashSet<string>
+        {
+            "89d3b9e7c7134f7f94c36518212b8596",
+            "9ffb3db35be843a1a18cfcac2d90581a",
+            "a7e3c400849846d1b5436136acc15319",
+            "601279edb9554f70b608c135fc44cfbf",
+            "9876491339ca4a60bd0419ceac6c80ec",
+            "218bd6f72ed845768d0e9a52e5d2073f"
+        };
         private static HandAttack.ClipSettings[] mainHand, offHand;
         private static bool installed, reportedFailure;
         public static bool Enabled { get; set; }
@@ -38,7 +46,8 @@ namespace ArmouryOrks.Runtime
                 return false;
             var owner = handle.Unit?.EntityData as PartUnitBody.IOwner;
             var hand = action.IsMainHand ? owner?.Body.PrimaryHand : owner?.Body.SecondaryHand;
-            return hand?.MaybeWeapon?.Blueprint.AssetGuid.ToString() == WeaponGuid;
+            string guid = hand?.MaybeWeapon?.Blueprint.AssetGuid.ToString();
+            return guid != null && WeaponGuids.Contains(guid);
         }
 
         private static HandAttack.ClipSettings[] Clips(bool isMainHand)

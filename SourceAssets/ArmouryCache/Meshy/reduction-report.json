@@ -1,0 +1,31 @@
+{
+  "source_fbx": "Meshy_AI_Orc_War_Chest_1020191842_texture.fbx",
+  "source_sha256": "50026d9a49f8dfb1f6631f402c099052a0709513048c2339b2b64c0aaa809538",
+  "original_triangles": 739366,
+  "reduced_triangles": 40000,
+  "reduction_percent": 94.59,
+  "dimensions_metres_blender_xyz": [
+    1.019995927810669,
+    0.6986684799194336,
+    0.5774962306022644
+  ],
+  "front_axis_blender": "-Y",
+  "unity_front_correction_degrees": 180,
+  "texture_size": [
+    2048,
+    2048
+  ],
+  "uv_layers": 1,
+  "pbr_reprojection": [
+    "BaseColor",
+    "Metallic",
+    "Roughness",
+    "Normal"
+  ],
+  "normal_bake": {
+    "selected_to_active": true,
+    "cage_extrusion": 0.008,
+    "max_ray_distance": 0.025,
+    "margin": 12
+  }
+}

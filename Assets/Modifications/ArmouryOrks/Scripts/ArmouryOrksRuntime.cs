@@ -9,11 +9,19 @@ namespace ArmouryOrks.Runtime
         public static void Initialize(OwlcatModification modification)
         {
             PowerKlawFistAnimations.Initialize();
+            ChainChoppaCombat.Initialize();
             ChoppaProgressionController.EnsureController();
+            OrkArmouryCacheController.EnsureController();
             modification.OnSetEnabled += enabled =>
             {
                 PowerKlawFistAnimations.Enabled = enabled;
-                if (enabled) ChoppaProgressionController.EnsureController();
+                ChainChoppaCombat.Enabled = enabled;
+                OrkArmouryCacheController.Enabled = enabled;
+                if (enabled)
+                {
+                    ChoppaProgressionController.EnsureController();
+                    OrkArmouryCacheController.EnsureController();
+                }
             };
             Debug.Log("[ArmouryOrks] Runtime initialized.");
         }

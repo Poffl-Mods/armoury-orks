@@ -2,14 +2,27 @@
   "AssetId": "59b2ed4cd3884ccc9f6f938a2ba69c78",
   "Data": {
     "$type": "c00f723cccf2d314198c42a572c631fd, BlueprintItemWeapon",
-    "PrototypeLink": "993996a4c0a24463aa400b9441d4caa8",
+    "PrototypeLink": "88863b6b0c61404b96b01c2bc648ba5e",
     "m_Overrides": [
-      "m_VisualParameters.m_WeaponModel",
-      "m_VisualParameters.m_WeaponAnimationStyle",
+      "Author",
+      "Comment",
+      "m_DisplayName",
+      "m_Description",
+      "m_CargoVolumePercent",
+      "m_InventoryPutSound",
+      "m_InventoryTakeSound",
+      "AbilityContainer",
+      "m_AttackOfOpportunityAbility",
+      "m_AttackOfOpportunityAbilityFXSettings",
       "Classification",
       "WarhammerDamage",
       "WarhammerMaxDamage",
       "WarhammerPenetration",
+      "m_DamageType",
+      "Components",
+      "m_VisualParameters",
+      "m_VisualParameters.m_WeaponModel",
+      "m_VisualParameters.m_WeaponAnimationStyle",
       "CanBeUsedInGame",
       "IsUnlootable"
     ],
@@ -21,14 +34,20 @@
       "m_OwnerString": "",
       "m_OwnerPropertyPath": "",
       "m_JsonPath": "",
-      "Shared": null
+      "Shared": {
+        "assetguid": "53da3d261c2772749ad697e4ff956976",
+        "stringkey": "2083f8d5-cdc9-4ff7-b11a-0c89d3faa4d4"
+      }
     },
     "m_Description": {
       "m_Key": "",
       "m_OwnerString": "",
       "m_OwnerPropertyPath": "",
       "m_JsonPath": "",
-      "Shared": null
+      "Shared": {
+        "assetguid": "e432dd7ed9e6d2e41833feae98229ca1",
+        "stringkey": "2c534cf0-d2a7-4dcd-a87e-b5f1917ae947"
+      }
     },
     "m_Icon": null,
     "m_FlavorText": {
@@ -73,7 +92,7 @@
     "m_EquipmentEntityAlternatives": [],
     "m_ForcedRampColorPresetIndex": -1,
     "m_VisualParameters": {
-      "m_WeaponAnimationStyle": "AxeTwoHanded",
+      "m_WeaponAnimationStyle": "BrutalTwoHanded",
       "m_SpecialAnimation": "None",
       "m_BurstAnimationDelay": 0.0,
       "m_WeaponModel": null,
@@ -86,7 +105,7 @@
         "Group": ""
       },
       "m_SoundTypeSwitch": {
-        "Value": "Blunt",
+        "Value": "Sharp",
         "Group": "ProjectileType"
       },
       "m_MuffledTypeSwitch": {
@@ -94,12 +113,12 @@
         "Group": ""
       },
       "m_MissSoundType": "None",
-      "m_EquipSound": "Foley_WP_M_Blunt_Equip_Play",
-      "m_UnequipSound": "Foley_WP_M_Blunt_Remove_Play",
+      "m_EquipSound": "Foley_WP_M_Sword_Equip_Play",
+      "m_UnequipSound": "Foley_WP_M_Sword_Remove_Play",
       "m_OutOfAmmoSound": "",
-      "m_InventoryEquipSound": "UI_INV_Blunt_Equip_Play",
-      "m_InventoryPutSound": "UI_INV_Blunt_Put_Play",
-      "m_InventoryTakeSound": "UI_INV_Blunt_Take_Play"
+      "m_InventoryEquipSound": "UI_INV_SharpSword_Equip_Play",
+      "m_InventoryPutSound": "UI_INV_SharpSword_Put_Play",
+      "m_InventoryTakeSound": "UI_INV_SharpSword_Take_Play"
     },
     "m_OnHitActions": null,
     "AbilityContainer": {

@@ -19,14 +19,20 @@
       "m_OwnerString": "",
       "m_OwnerPropertyPath": "",
       "m_JsonPath": "",
-      "Shared": null
+      "Shared": {
+        "assetguid": "bbb14c37ecf5dd945af67999edcbf7d6",
+        "stringkey": "d288657d-ca7c-4758-b9f4-7deb6086e292"
+      }
     },
     "m_Description": {
       "m_Key": "",
       "m_OwnerString": "",
       "m_OwnerPropertyPath": "",
       "m_JsonPath": "",
-      "Shared": null
+      "Shared": {
+        "assetguid": "91dd83646c93ab04c8aa4816f936a4d5",
+        "stringkey": "1d673611-90f3-40a1-955d-5806fc95b049"
+      }
     },
     "m_Icon": null,
     "m_FlavorText": {

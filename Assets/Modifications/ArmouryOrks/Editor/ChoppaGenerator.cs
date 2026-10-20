@@ -14,12 +14,34 @@ using UnityEngine;
 
 namespace ArmouryOrks.Editor
 {
-    internal static class ChoppaGenerator
+    internal static partial class ChoppaGenerator
     {
         // Generated assets and the distributable are built from the Unity editor menu.
         internal const string WeaponGuid = "9f1a0cab53be493b96989c9a672d2ae5";
         internal const string BigChoppaWeaponGuid = "f842bd6192ec4f9d91eb83278470c671";
         internal const string PowerKlawWeaponGuid = "89d3b9e7c7134f7f94c36518212b8596";
+        internal static readonly string[] PowerKlawWeaponGuids =
+        {
+            PowerKlawWeaponGuid, "9ffb3db35be843a1a18cfcac2d90581a", "a7e3c400849846d1b5436136acc15319",
+            "601279edb9554f70b608c135fc44cfbf", "9876491339ca4a60bd0419ceac6c80ec", "218bd6f72ed845768d0e9a52e5d2073f"
+        };
+        private static readonly int[] PowerKlawDamageMin = { 8, 10, 18, 22, 27, 34 };
+        private static readonly int[] PowerKlawDamageMax = { 13, 14, 27, 32, 41, 50 };
+        private static readonly int[] PowerKlawPenetration = { 30, 30, 35, 40, 45, 50 };
+        private static readonly string[] PowerKlawTierNames =
+        {
+            "Power Klaw", "Kustom Power Klaw", "'Urty Power Klaw", "Killy Power Klaw",
+            "Dead Killy Power Klaw", "Da Boss's Klaw"
+        };
+        private const string KlawKrumpGuid = "b155ee1863864b3d9ad0adcf8584e591";
+        private const string KlawSweepGuid = "8f6642c9cd7a42a7946075203f3e2381";
+        private const string KlawPushGuid = "639cde5c2c32442cbac5d472cc790e38";
+        private const string KlawArmourGuid = "80d6acffc85b4680871298d80ea04890";
+        private const string KlawArmourBuffGuid = "1e0c0c689b65427bb64cdf309431c382";
+        private static readonly string[] KlawSqueezeGuids = { "329fa2e560e0447ebe02806909995cba", "8739cc6d623343278c5816ef358005c0" };
+        private static readonly string[] KlawSqueezeWeaponGuids = { "e1e917e6daca460eb481b143a8440255", "8eb87e57eeb4458787344cd9a5b35a17" };
+        private const string ArmourLimitReference = "e21dbeb3b9baacf4383912beeb5a62ef";
+        private const string MissEffectReference = "7b1047c7df534302ad2d77b76129ea40";
         internal static readonly string[] BigChoppaWeaponGuids =
         {
             BigChoppaWeaponGuid, "a0f30782b1454053920b101af9e10908", "9bd81c627e58489ba2495eeef5df8f77",
@@ -76,6 +98,7 @@ namespace ArmouryOrks.Editor
         private const string ChargeAbilityPrototype = "c78506dd0e14f7c45a599990e4e65038";
         private const string StrikeAbilityPrototype = "be721a48e3614ddbb86bf18503511c2c";
         private const string TwoHandedWeaponPrototype = "993996a4c0a24463aa400b9441d4caa8";
+        private const string GreatSwordWeaponPrototype = "88863b6b0c61404b96b01c2bc648ba5e";
         private const string TwoHandedStrikeAbility = "9dec1bdade284190b0977f5f70d26d3e";
         private const string TwoHandedCleaveAbility = "163013a18e9c46419b2311454ad2b2c8";
         private const string OmnissiahAxeCleaveAbility = "5e35e29dfa8e4133a9d10b3070d20c0b";
@@ -89,6 +112,11 @@ namespace ArmouryOrks.Editor
         private const string OverrideWeaponReference = "84c32baad3f14585a32f5747d721dfc3";
         private const string ParryModifierReference = "53c19a9468d24539863989b3be9ed1f5";
         private const string DodgeModifierReference = "96e84143a45d4150b0233b5b58087fd1";
+        // Native game silhouettes, matching the ability icon style used by both Choppas.
+        private const string KlawStrikeIconGuid = "42b9acabc21013f4c93e7c7c959a2fa4"; // ClawAttack
+        private const string KlawPushIconGuid = "2ec6ed3e7bae16342ab00d87bd0a8628"; // Kick / knockback
+        private const string KlawArmourIconGuid = "885f114a74919494fbd08131f00fa886"; // Study_Defenses
+        private const string KlawSqueezeIconGuid = "ec5c592ea58e791489d9814cd3004bd6"; // MastiffClaws
         private const string AxeStrikeIconGuid = "a6cba97367839af4e8869281de029095";
         private const string ChargeIconGuid = "4ef6dd81793f49444b6e53d7c68bdfd3";
         private const string TauntingScreamIconGuid = "1c30d7bb062c45f47b82491b6d4e401e";
@@ -124,6 +152,8 @@ namespace ArmouryOrks.Editor
         private const string BigChoppaGripMeshPath = Art + "/BigChoppa_GripAligned.asset";
         private const string PowerKlawFbxPath = Art + "/PowerKlaw.fbx";
         private const string PowerKlawPrefabPath = Art + "/PowerKlaw.prefab";
+        private const string PowerKlawHolsteredPrefabPath = Art + "/PowerKlaw_Holstered.prefab";
+        private const string PowerKlawInventoryIconPath = Art + "/PowerKlaw_InventoryIcon.png";
         private const string PowerKlawBaseColorPath = Art + "/PowerKlaw_BaseColor.png";
         private const string PowerKlawMetallicPath = Art + "/PowerKlaw_Metallic.png";
         private const string PowerKlawNormalPath = Art + "/PowerKlaw_Normal_Source.png";
@@ -136,13 +166,21 @@ namespace ArmouryOrks.Editor
         // Vanilla one-handed primitive axe; uses the BrutalOneHanded animation style.
         private const string WeaponPrototype = "b61740707f6b477f9ed139b22a81d245";
 
-        [MenuItem("Armoury Orks/Build 0.4.15 Test")]
-        public static void Build()
+        [MenuItem("Armoury Orks/Build 1.0.0 macOS")]
+        public static void Build() => BuildForPlatform(BuildTarget.StandaloneOSX);
+
+        [MenuItem("Armoury Orks/Build 1.0.0 Windows")]
+        public static void BuildWindows() => BuildForPlatform(BuildTarget.StandaloneWindows64);
+
+        private static void BuildForPlatform(BuildTarget target)
         {
+            if (EditorUserBuildSettings.activeBuildTarget != target)
+                throw new InvalidOperationException($"Expected build platform {target}; start Unity with -buildTarget {(target == BuildTarget.StandaloneOSX ? "osx" : "win64")}.");
             Generate();
+            ValidateChainCombatContracts();
             Modification mod = AssetDatabase.LoadAssetAtPath<Modification>(Root + "/ArmouryOrks.asset");
             if (mod == null) throw new InvalidOperationException("ArmouryOrks Modification asset was not found.");
-            mod.Manifest.Version = "0.4.15";
+            mod.Manifest.Version = "1.0.0";
             EditorUtility.SetDirty(mod);
             AssetDatabase.SaveAssets();
             var result = Builder.Build(mod);
@@ -161,6 +199,9 @@ namespace ArmouryOrks.Editor
             GenerateBigChoppaBlueprint();
             GeneratePowerKlawArt();
             GeneratePowerKlawBlueprint();
+            GenerateChainChoppaArt();
+            GenerateChainChoppaBlueprint();
+            GenerateArmouryCache();
             WriteLocalization();
             AssetDatabase.Refresh();
             Debug.Log("[ArmouryOrks] Choppa generated. ToyBox name: Choppa; Blueprint: " + WeaponGuid);
@@ -268,8 +309,8 @@ namespace ArmouryOrks.Editor
             SetTexture(material, baseColor, "_BaseMap", "_BaseColorMap", "_MainTex");
             SetTexture(material, mask, "_MasksMap");
             SetTexture(material, normal, "_BumpMap", "_NormalMap");
-            SetFloat(material, 0.8f, "_Metallic");
-            SetFloat(material, 0.9f, "_Roughness");
+            SetFloat(material, 0.9f, "_Metallic");
+            SetFloat(material, 0.62f, "_Roughness");
             SetColor(material, Color.white, "_BaseColor", "_Color", "_AdditionalAlbedoColor");
             material.DisableKeyword("_METALLICSPECGLOSSMAP");
             material.EnableKeyword("_MASKSMAP");
@@ -485,7 +526,29 @@ namespace ArmouryOrks.Editor
             Mesh generated = UnityEngine.Object.Instantiate(filter.sharedMesh);
             generated.name = "BigChoppa_GripAligned";
             Vector3[] vertices = generated.vertices;
-            for (int i = 0; i < vertices.Length; i++) vertices[i] += localVertexOffset;
+            // Source-local X follows the shaft. Scale around the hand socket rather
+            // than the FBX origin, so lengthening the weapon does not move its grip.
+            Matrix4x4 meshToRoot = Matrix4x4.Rotate(visualRotation)
+                * Matrix4x4.TRS(model.transform.localPosition, model.transform.localRotation,
+                    model.transform.localScale);
+            Vector3 grip = meshToRoot.inverse.MultiplyPoint3x4(Vector3.zero);
+            Vector3 enlargement = new Vector3(1.25f, 1.10f, 1.10f);
+            for (int i = 0; i < vertices.Length; i++)
+                vertices[i] = grip + Vector3.Scale(vertices[i] + localVertexOffset - grip, enlargement);
+            // Non-uniform scaling requires inverse-transpose normals and transformed tangents.
+            Vector3[] normals = generated.normals;
+            for (int i = 0; i < normals.Length; i++)
+                normals[i] = new Vector3(normals[i].x / enlargement.x,
+                    normals[i].y / enlargement.y, normals[i].z / enlargement.z).normalized;
+            generated.normals = normals;
+            Vector4[] tangents = generated.tangents;
+            for (int i = 0; i < tangents.Length; i++)
+            {
+                Vector3 tangent = Vector3.Scale(new Vector3(tangents[i].x, tangents[i].y,
+                    tangents[i].z), enlargement).normalized;
+                tangents[i] = new Vector4(tangent.x, tangent.y, tangent.z, tangents[i].w);
+            }
+            generated.tangents = tangents;
             generated.vertices = vertices;
             generated.RecalculateBounds();
 
@@ -527,8 +590,8 @@ namespace ArmouryOrks.Editor
             SetTexture(material, baseColor, "_BaseMap", "_BaseColorMap", "_MainTex");
             SetTexture(material, mask, "_MasksMap");
             SetTexture(material, normal, "_BumpMap", "_NormalMap");
-            SetFloat(material, 0.8f, "_Metallic");
-            SetFloat(material, 0.9f, "_Roughness");
+            SetFloat(material, 0.9f, "_Metallic");
+            SetFloat(material, 0.62f, "_Roughness");
             SetColor(material, Color.white, "_BaseColor", "_Color", "_AdditionalAlbedoColor");
             material.DisableKeyword("_METALLICSPECGLOSSMAP");
             material.EnableKeyword("_MASKSMAP");
@@ -582,6 +645,12 @@ namespace ArmouryOrks.Editor
 
             PrefabUtility.SaveAsPrefabAsset(root, PowerKlawPrefabPath);
             UnityEngine.Object.DestroyImmediate(root);
+
+            // The engine selects BeltModel whenever IsInHand is false. An empty
+            // prefab avoids relying on skeleton-specific holster socket names.
+            GameObject holstered = new GameObject("PowerKlaw_Holstered");
+            PrefabUtility.SaveAsPrefabAsset(holstered, PowerKlawHolsteredPrefabPath);
+            UnityEngine.Object.DestroyImmediate(holstered);
             AssetDatabase.SaveAssets();
         }
 
@@ -622,8 +691,8 @@ namespace ArmouryOrks.Editor
             SetTexture(material, baseColor, "_BaseMap", "_BaseColorMap", "_MainTex");
             SetTexture(material, mask, "_MasksMap");
             SetTexture(material, normal, "_BumpMap", "_NormalMap");
-            SetFloat(material, 0.8f, "_Metallic");
-            SetFloat(material, 0.68f, "_Roughness");
+            SetFloat(material, 0.9f, "_Metallic");
+            SetFloat(material, 0.50f, "_Roughness");
             SetColor(material, Color.white, "_BaseColor", "_Color", "_AdditionalAlbedoColor");
             material.DisableKeyword("_METALLICSPECGLOSSMAP");
             material.EnableKeyword("_MASKSMAP");
@@ -638,39 +707,168 @@ namespace ArmouryOrks.Editor
             UnityEngine.Object prefab = AssetDatabase.LoadMainAssetAtPath(PowerKlawPrefabPath);
             if (prefab == null || !AssetDatabase.TryGetGUIDAndLocalFileIdentifier(prefab, out string prefabGuid, out long prefabFileId))
                 throw new InvalidDataException("Power Klaw prefab could not be resolved.");
-            JObject weapon = PrepareClone(Load(WeaponPrototype), PowerKlawWeaponGuid, WeaponPrototype);
-            weapon["Data"]["Components"] = new JArray();
-            SetText(weapon, "power-klaw-v1-name", "power-klaw-v1-description", "power-klaw-v1-flavor");
-            weapon["Data"]["m_Icon"] = UnityReference("dc6c9d334c722964d9c668867857a87a", 21300000L);
-            AddOverride(weapon, "m_Icon");
-            weapon["Data"]["m_VisualParameters"]["m_WeaponModel"] = UnityReference(prefabGuid, prefabFileId);
-            AddOverride(weapon, "m_VisualParameters.m_WeaponModel");
-            // Runtime supplies the original human fist clips for this weapon.
-            weapon["Data"]["m_VisualParameters"]["m_WeaponAnimationStyle"] = "Fist";
-            AddOverride(weapon, "m_VisualParameters.m_WeaponAnimationStyle");
-            Override(weapon, "Family", "Primitive");
-            Override(weapon, "Classification", "None");
-            Override(weapon, "m_HoldingType", "OneHanded");
-            Override(weapon, "IsTwoHanded", false);
-            Override(weapon, "WarhammerDamage", 14);
-            Override(weapon, "WarhammerMaxDamage", 24);
-            Override(weapon, "WarhammerPenetration", 30);
-            Override(weapon, "ItemLevel", 9);
-            Override(weapon, "m_Enchantments", new JArray());
-            Override(weapon, "m_Rarity", "Pattern");
-            Override(weapon, "CanBeUsedInGame", true);
-            Override(weapon, "IsUnlootable", false);
-            Override(weapon, "IsNonRemovable", false);
-            Override(weapon, "m_IsNotable", true);
-            Override(weapon, "m_DamageType", new JObject { ["Type"] = "Impact" });
-            SetAbilitySlot(weapon, "Ability1", "SingleShot", StrikeAbilityPrototype, null, 1);
-            SetAbilitySlot(weapon, "Ability2", "AOE", BigChoppaCleaveGuid, PowerAxeFx, 2);
-            ClearAbilitySlot(weapon, "Ability3");
-            ClearAbilitySlot(weapon, "Ability4");
-            ClearAbilitySlot(weapon, "Ability5");
-            weapon["Data"]["m_AttackOfOpportunityAbility"] = "!bp_" + StrikeAbilityPrototype;
-            AddOverride(weapon, "m_AttackOfOpportunityAbility");
-            SaveBlueprint("PowerKlaw_V1_Item", weapon);
+            GeneratePowerKlawTiers(prefabGuid, prefabFileId);
+        }
+
+        private static void GeneratePowerKlawTiers(string prefabGuid, long prefabFileId)
+        {
+            UnityEngine.Object holstered = AssetDatabase.LoadMainAssetAtPath(PowerKlawHolsteredPrefabPath);
+            if (holstered == null || !AssetDatabase.TryGetGUIDAndLocalFileIdentifier(holstered, out string holsteredGuid, out long holsteredFileId))
+                throw new InvalidDataException("Power Klaw holstered prefab could not be resolved.");
+            if (((GameObject)holstered).GetComponentsInChildren<Renderer>(true).Length != 0)
+                throw new InvalidDataException("Power Klaw holstered prefab must contain no renderers.");
+            UnityEngine.Object icon = PrepareInventoryIcon(PowerKlawInventoryIconPath, "Power Klaw");
+            if (!AssetDatabase.TryGetGUIDAndLocalFileIdentifier(icon, out string iconGuid, out long iconFileId))
+                throw new InvalidDataException("Power Klaw inventory icon could not be resolved.");
+            GeneratePowerKlawAbilities(iconGuid, iconFileId);
+            for (int i = 0; i < PowerKlawWeaponGuids.Length; i++)
+            {
+                int tier = i + 1;
+                JObject weapon = PrepareClone(Load(WeaponPrototype), PowerKlawWeaponGuids[i], WeaponPrototype);
+                Override(weapon, "Components", new JArray());
+                SetText(weapon, $"power-klaw-v{tier}-name", $"power-klaw-v{tier}-description", $"power-klaw-v{tier}-flavor");
+                Override(weapon, "m_Icon", UnityReference(iconGuid, iconFileId));
+                weapon["Data"]["m_VisualParameters"]["m_WeaponModel"] = UnityReference(prefabGuid, prefabFileId);
+                AddOverride(weapon, "m_VisualParameters.m_WeaponModel");
+                weapon["Data"]["m_VisualParameters"]["m_WeaponBeltModelOverride"] = UnityReference(holsteredGuid, holsteredFileId);
+                weapon["Data"]["m_VisualParameters"]["m_WeaponSheathModelOverride"] = UnityReference(holsteredGuid, holsteredFileId);
+                AddOverride(weapon, "m_VisualParameters.m_WeaponBeltModelOverride");
+                AddOverride(weapon, "m_VisualParameters.m_WeaponSheathModelOverride");
+                weapon["Data"]["m_VisualParameters"]["m_WeaponAnimationStyle"] = "Fist";
+                AddOverride(weapon, "m_VisualParameters.m_WeaponAnimationStyle");
+                Override(weapon, "Family", "Primitive");
+                Override(weapon, "Classification", "None");
+                Override(weapon, "m_HoldingType", "OneHanded");
+                Override(weapon, "IsTwoHanded", false);
+                Override(weapon, "WarhammerDamage", PowerKlawDamageMin[i]);
+                Override(weapon, "WarhammerMaxDamage", PowerKlawDamageMax[i]);
+                Override(weapon, "WarhammerPenetration", PowerKlawPenetration[i]);
+                Override(weapon, "ItemLevel", tier == 6 ? 55 : i * 10 + 9);
+                Override(weapon, "m_Enchantments", new JArray());
+                Override(weapon, "m_Rarity", tier <= 2 ? "Pattern" : "Unique");
+                Override(weapon, "CanBeUsedInGame", true);
+                Override(weapon, "IsUnlootable", false);
+                Override(weapon, "IsNonRemovable", false);
+                Override(weapon, "m_IsNotable", true);
+                Override(weapon, "m_DamageType", new JObject { ["Type"] = "Impact" });
+                SetAbilitySlot(weapon, "Ability1", "SingleShot", KlawKrumpGuid, null, 1);
+                SetAbilitySlot(weapon, "Ability2", "AOE", KlawSweepGuid, PowerAxeFx, 2);
+                SetAbilitySlot(weapon, "Ability3", "SingleShot", KlawPushGuid, null, 2);
+                if (tier >= 3) SetAbilitySlot(weapon, "Ability4", "SingleShot", KlawArmourGuid, null, 2);
+                else ClearAbilitySlot(weapon, "Ability4");
+                if (tier >= 5) SetAbilitySlot(weapon, "Ability5", "SingleShot", KlawSqueezeGuids[i - 4], null, 2);
+                else ClearAbilitySlot(weapon, "Ability5");
+                Override(weapon, "m_AttackOfOpportunityAbility", "!bp_" + KlawKrumpGuid);
+                SaveBlueprint($"PowerKlaw_V{tier}_Item", weapon);
+            }
+        }
+
+        private static void GeneratePowerKlawAbilities(string iconGuid, long iconFileId)
+        {
+            JObject krump = CreatePowerKlawAttack(KlawKrumpGuid, "krump", 1);
+            SaveBlueprint("PowerKlaw_Krump_Ability", krump);
+
+            JObject sweep = PrepareClone(Load(NormalCleaveAbility), KlawSweepGuid, NormalCleaveAbility);
+            SetAbilityText(sweep, "power-klaw-sweep-name", "power-klaw-sweep-description");
+            SetAbilityIcon(sweep, ColossalCleaveIconGuid);
+            Override(sweep, "ActionPointCost", 2);
+            Override(sweep, "CombatStateRestriction", "NoRestriction");
+            SaveBlueprint("PowerKlaw_Sweep_Ability", sweep);
+
+            JObject push = CreatePowerKlawAttack(KlawPushGuid, "push", 2, PushAction(1));
+            SaveBlueprint("PowerKlaw_GetBack_Ability", push);
+
+            // Cap armour absorption at zero rather than subtracting 100 points.
+            // This handles armour above 100% and leaves deflection untouched.
+            JObject buff = PrepareClone(Load(BerserkBuffPrototype), KlawArmourBuffGuid, BerserkBuffPrototype);
+            JObject armour = CloneComponent(ArmourLimitReference, "WarhammerArmorBonus", "$WarhammerArmorBonus$power-klaw");
+            armour["ForceDeflectionMaximum"] = false;
+            armour["ForcePctDeflectionMaximum"] = false;
+            armour["ForceAbsorptionMaximum"] = true;
+            armour["AbsorptionMaximumValue"] = SimpleValue(0);
+            Override(buff, "Components", new JArray(armour));
+            Override(buff, "Stacking", "Replace");
+            Override(buff, "Initiative", "ByCaster");
+            SetAbilityText(buff, "power-klaw-armour-buff-name", "power-klaw-armour-buff-description");
+            SetAbilityIcon(buff, KlawArmourIconGuid);
+            SaveBlueprint("PowerKlaw_NoArmour_Buff", buff);
+
+            JObject strip = CreatePowerKlawAttack(KlawArmourGuid, "armour", 2,
+                ApplyBuffAction(KlawArmourBuffGuid, 2, false), ApplyBuffAction(KlawArmourBuffGuid, 2, true));
+            AddRoundCooldown(strip, 3, "$WarhammerCooldown$power-klaw-armour");
+            SaveBlueprint("PowerKlaw_Armour_Ability", strip);
+
+            for (int i = 4; i < 6; i++)
+            {
+                string weaponGuid = KlawSqueezeWeaponGuids[i - 4];
+                JObject hidden = PrepareClone(Load(WeaponPrototype), weaponGuid, WeaponPrototype);
+                Override(hidden, "Components", new JArray());
+                Override(hidden, "m_Icon", UnityReference(iconGuid, iconFileId));
+                hidden["Data"]["m_VisualParameters"]["m_WeaponModel"] = null;
+                hidden["Data"]["m_VisualParameters"]["m_WeaponAnimationStyle"] = "Fist";
+                AddOverride(hidden, "m_VisualParameters.m_WeaponModel");
+                AddOverride(hidden, "m_VisualParameters.m_WeaponAnimationStyle");
+                Override(hidden, "Classification", "None");
+                Override(hidden, "WarhammerDamage", PowerKlawDamageMin[i] * 2);
+                Override(hidden, "WarhammerMaxDamage", PowerKlawDamageMax[i] * 2);
+                Override(hidden, "WarhammerPenetration", PowerKlawPenetration[i]);
+                Override(hidden, "m_DamageType", new JObject { ["Type"] = "Impact" });
+                Override(hidden, "CanBeUsedInGame", false);
+                Override(hidden, "IsUnlootable", true);
+                SaveBlueprint($"PowerKlaw_V{i + 1}_HiddenSqueeze_Item", hidden);
+
+                JObject squeeze = CreatePowerKlawAttack(KlawSqueezeGuids[i - 4], "squeeze", 2,
+                    ApplyBuffAction(ProneBuffGuid, 1, true));
+                ConfigureBigChoppaAttack(squeeze, weaponGuid, "power-klaw-squeeze-name", "power-klaw-squeeze-description", 2);
+                SetAbilityIcon(squeeze, KlawSqueezeIconGuid);
+                // Delivery normally runs effects only on a hit. This marker allows
+                // the self-knockdown after a miss too; it does not make damage hit.
+                JObject miss = CloneComponent(MissEffectReference, "AbilityEffectMissIsHit", "$AbilityEffectMissIsHit$power-klaw-squeeze");
+                ((JArray)squeeze["Data"]["Components"]).Add(miss);
+                AddOverride(squeeze, "Components");
+                AddRoundCooldown(squeeze, 4, "$WarhammerCooldown$power-klaw-squeeze");
+                SaveBlueprint($"PowerKlaw_V{i + 1}_Squeeze_Ability", squeeze);
+            }
+        }
+
+        private static JObject CreatePowerKlawAttack(string guid, string key, int ap, params JObject[] onHitActions)
+        {
+            JObject ability = PrepareClone(Load(StrikeAbilityPrototype), guid, StrikeAbilityPrototype);
+            SetAbilityText(ability, $"power-klaw-{key}-name", $"power-klaw-{key}-description");
+            string icon = key == "krump" ? KlawStrikeIconGuid
+                : key == "push" ? KlawPushIconGuid
+                : key == "armour" ? KlawArmourIconGuid : KlawSqueezeIconGuid;
+            SetAbilityIcon(ability, icon);
+            Override(ability, "ActionPointCost", ap);
+            Override(ability, "CooldownRounds", 0);
+            Override(ability, "CombatStateRestriction", "NoRestriction");
+            if (onHitActions.Length > 0)
+            {
+                JObject run = CloneComponent(TwoHandedStrikeAbility, "AbilityEffectRunAction", "$AbilityEffectRunAction$power-klaw-" + key);
+                run["Actions"]["Actions"] = new JArray(onHitActions);
+                ((JArray)ability["Data"]["Components"]).Add(run);
+                AddOverride(ability, "Components");
+            }
+            return ability;
+        }
+
+        private static JObject PrepareBigChoppaClone(string guid)
+        {
+            // Retain the existing mechanics, but inherit the native two-handed sword handling.
+            // Override the complete visual object so the staff prototype cannot supply
+            // the effective animation style through nested visual inheritance.
+            JObject weapon = PrepareClone(Load(TwoHandedWeaponPrototype), guid, GreatSwordWeaponPrototype);
+            JObject sword = Load(GreatSwordWeaponPrototype);
+            foreach (JProperty property in ((JObject)weapon["Data"]).Properties())
+            {
+                if (property.Name == "PrototypeLink" || property.Name == "m_Overrides"
+                    || property.Name == "Components" || property.Name == "m_VisualParameters") continue;
+                if (!JToken.DeepEquals(property.Value, sword["Data"][property.Name]))
+                    AddOverride(weapon, property.Name);
+            }
+            Override(weapon, "Components", new JArray());
+            Override(weapon, "m_VisualParameters", sword["Data"]["m_VisualParameters"].DeepClone());
+            return weapon;
         }
 
         private static void GenerateBigChoppaBlueprint()
@@ -686,14 +884,14 @@ namespace ArmouryOrks.Editor
             for (int i = 0; i < 6; i++)
             {
                 int tier = i + 1;
-                JObject weapon = PrepareClone(Load(TwoHandedWeaponPrototype), BigChoppaWeaponGuids[i], TwoHandedWeaponPrototype);
+                JObject weapon = PrepareBigChoppaClone(BigChoppaWeaponGuids[i]);
                 weapon["Data"]["Components"] = new JArray();
                 SetText(weapon, $"big-choppa-v{tier}-name", $"big-choppa-v{tier}-description", $"big-choppa-v{tier}-flavor");
                 weapon["Data"]["m_Icon"] = UnityReference(iconGuid, iconFileId);
                 AddOverride(weapon, "m_Icon");
                 weapon["Data"]["m_VisualParameters"]["m_WeaponModel"] = UnityReference(prefabGuid, prefabFileId);
                 AddOverride(weapon, "m_VisualParameters.m_WeaponModel");
-                weapon["Data"]["m_VisualParameters"]["m_WeaponAnimationStyle"] = "AxeTwoHanded";
+                weapon["Data"]["m_VisualParameters"]["m_WeaponAnimationStyle"] = "BrutalTwoHanded";
                 AddOverride(weapon, "m_VisualParameters.m_WeaponAnimationStyle");
                 Override(weapon, "Family", "Primitive");
                 Override(weapon, "Classification", "None");
@@ -768,11 +966,11 @@ namespace ArmouryOrks.Editor
 
         private static void GenerateHiddenBigChoppa(int i, string guid, float multiplier, string file)
         {
-            JObject hidden = PrepareClone(Load(TwoHandedWeaponPrototype), guid, TwoHandedWeaponPrototype);
+            JObject hidden = PrepareBigChoppaClone(guid);
             hidden["Data"]["Components"] = new JArray();
             hidden["Data"]["m_VisualParameters"]["m_WeaponModel"] = null;
             AddOverride(hidden, "m_VisualParameters.m_WeaponModel");
-            hidden["Data"]["m_VisualParameters"]["m_WeaponAnimationStyle"] = "AxeTwoHanded";
+            hidden["Data"]["m_VisualParameters"]["m_WeaponAnimationStyle"] = "BrutalTwoHanded";
             AddOverride(hidden, "m_VisualParameters.m_WeaponAnimationStyle");
             Override(hidden, "Classification", "None");
             Override(hidden, "WarhammerDamage", Mathf.RoundToInt(BigChoppaDamageMin[i] * multiplier));
@@ -1183,7 +1381,6 @@ namespace ArmouryOrks.Editor
 
         private static void WriteLocalization()
         {
-            string[] levelRanges = { "1-15", "16-25", "26-35", "36-43", "44-49", "50-55" };
             string[] descriptions =
             {
                 "A heavy Ork blade hammered together from scavenged metal. It is crude, badly balanced and remarkably effective when swung with sufficient enthusiasm.",
@@ -1203,9 +1400,8 @@ namespace ArmouryOrks.Editor
             for (int i = 0; i < 6; i++)
             {
                 int tier = i + 1;
-                string unlocked = tier >= 5 ? "\n• SLAUGHTER" : tier >= 3 ? "\n• WAAAAAAAAAAGH!" : "";
                 strings[$"choppa-v{tier}-name"] = Entry(TierNames[i]);
-                strings[$"choppa-v{tier}-description"] = Entry($"{descriptions[i]}\n\n• Levels: {levelRanges[i]}\n• Damage: {DamageMin[i]}-{DamageMax[i]}\n• Armour penetration: {Penetration[i]}%\n• WAAAGH!{unlocked}");
+                strings[$"choppa-v{tier}-description"] = Entry(descriptions[i]);
                 strings[$"choppa-v{tier}-flavor"] = Entry(flavors[i]);
             }
             strings["choppa-waaagh-name"] = Entry("WAAAGH!");
@@ -1237,9 +1433,8 @@ namespace ArmouryOrks.Editor
             for (int i = 0; i < 6; i++)
             {
                 int tier = i + 1;
-                string unlocked = tier >= 5 ? "\n• DA BIGGEST BONK!" : tier >= 3 ? "\n• SPIN TA WIN!" : "";
                 strings[$"big-choppa-v{tier}-name"] = Entry(BigChoppaTierNames[i]);
-                strings[$"big-choppa-v{tier}-description"] = Entry($"{bigChoppaDescriptions[i]}\n\n• Levels: {levelRanges[i]}\n• Damage: {BigChoppaDamageMin[i]}-{BigChoppaDamageMax[i]}\n• Armour penetration: {BigChoppaPenetration[i]}%\n• BIG SWING!{unlocked}");
+                strings[$"big-choppa-v{tier}-description"] = Entry(bigChoppaDescriptions[i]);
                 strings[$"big-choppa-v{tier}-flavor"] = Entry(bigChoppaFlavor[i]);
             }
             strings["big-choppa-big-swing-name"] = Entry("BIG SWING!");
@@ -1254,9 +1449,37 @@ namespace ArmouryOrks.Editor
             strings["big-choppa-spin-buff-description"] = Entry("-20 Weapon Skill and dodge chance for 1 round.");
             strings["big-choppa-cleave-name"] = Entry("Cleave");
             strings["big-choppa-cleave-description"] = Entry("Swing the Big Choppa through the three tiles directly in front of the wielder. Cost: 2 AP.");
-            strings["power-klaw-v1-name"] = Entry("Power Klaw");
-            strings["power-klaw-v1-description"] = Entry("A roaring mechanical claw built from pistons, scavenged armour plate and the Ork conviction that anything worth grabbing is worth crushing.\n\n• Test version V1\n• Damage: 14-24\n• Armour penetration: 30%\n• Original human fist attack animations");
-            strings["power-klaw-v1-flavor"] = Entry("'Grab it. Squeeze it. If it stops movin', squeeze da next one.'");
+            string[] klawFlavor =
+            {
+                "'Grab it. Squeeze it. If it stops movin', squeeze da next one.'",
+                "'Da extra piston makes it kustom. Da extra noise makes it better.'",
+                "'Panzer? Dat just means squeeze harder.'",
+                "'If da klaw fits, krump it.'",
+                "'If you ain't fallin' over, you ain't squeezin' hard enough.'",
+                "'Only da boss gets to press ALL da buttons.'"
+            };
+            for (int i = 0; i < PowerKlawWeaponGuids.Length; i++)
+            {
+                int tier = i + 1;
+                strings[$"power-klaw-v{tier}-name"] = Entry(PowerKlawTierNames[i]);
+                strings[$"power-klaw-v{tier}-description"] = Entry("A roaring mechanical claw built from pistons, scavenged armour plate and the Ork conviction that anything worth grabbing is worth crushing.");
+                strings[$"power-klaw-v{tier}-flavor"] = Entry(klawFlavor[i]);
+            }
+            strings["power-klaw-krump-name"] = Entry("KRUMP!");
+            strings["power-klaw-krump-description"] = Entry("Strike one enemy with the Power Klaw for normal weapon damage. Cost: 1 AP.");
+            strings["power-klaw-sweep-name"] = Entry("SWEEP!");
+            strings["power-klaw-sweep-description"] = Entry("Sweep the Power Klaw through the three tiles directly in front of the wielder for normal weapon damage. Cost: 2 AP.");
+            strings["power-klaw-push-name"] = Entry("GET BACK!");
+            strings["power-klaw-push-description"] = Entry("Strike one enemy for normal weapon damage. On a hit, push the target 1 cell away without provoking attacks of opportunity. Cost: 2 AP.");
+            strings["power-klaw-armour-name"] = Entry("ARMOUR? WOT ARMOUR?!");
+            strings["power-klaw-armour-description"] = Entry("Strike one enemy for normal weapon damage. On a hit, both the target and the wielder lose all armour absorption for 2 rounds against all attackers. Deflection, dodge and parry are unchanged. On a miss, neither loses armour. Cost: 2 AP. Cooldown: 3 rounds from use, including on a miss.");
+            strings["power-klaw-armour-buff-name"] = Entry("WOT ARMOUR?!");
+            strings["power-klaw-armour-buff-description"] = Entry("Armour absorption is capped at 0 for 2 rounds. Deflection, dodge and parry are unchanged.");
+            strings["power-klaw-squeeze-name"] = Entry("DA BIG SQUEEZE!");
+            strings["power-klaw-squeeze-description"] = Entry("Strike one enemy for 200% weapon damage. After the attack, the wielder is knocked prone for 1 round, even if the attack misses. Cost: 2 AP. Cooldown: 4 rounds from use. Does not automatically knock down the target.");
+            WriteChainLocalization(strings);
+            strings["ork-cache-name"] = Entry("DA LOOT BOX");
+            strings["ork-cache-description"] = Entry("A battered cache of Ork weapons. Four ways to make a proper mess. No refunds.");
             JObject document = new JObject
             {
                 ["strings"] = strings

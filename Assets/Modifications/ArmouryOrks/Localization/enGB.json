@@ -6,7 +6,7 @@
     },
     "choppa-v1-description": {
       "Offset": 0,
-      "Text": "A heavy Ork blade hammered together from scavenged metal. It is crude, badly balanced and remarkably effective when swung with sufficient enthusiasm.\n\n• Levels: 1-15\n• Damage: 9-15\n• Armour penetration: 15%\n• WAAAGH!"
+      "Text": "A heavy Ork blade hammered together from scavenged metal. It is crude, badly balanced and remarkably effective when swung with sufficient enthusiasm."
     },
     "choppa-v1-flavor": {
       "Offset": 0,
@@ -18,7 +18,7 @@
     },
     "choppa-v2-description": {
       "Offset": 0,
-      "Text": "Someone has taken the unusual step of sharpening this Choppa. The irregular edge now catches armour, flesh and anything else unfortunate enough to stand nearby.\n\n• Levels: 16-25\n• Damage: 11-16\n• Armour penetration: 15%\n• WAAAGH!"
+      "Text": "Someone has taken the unusual step of sharpening this Choppa. The irregular edge now catches armour, flesh and anything else unfortunate enough to stand nearby."
     },
     "choppa-v2-flavor": {
       "Offset": 0,
@@ -30,7 +30,7 @@
     },
     "choppa-v3-description": {
       "Offset": 0,
-      "Text": "This scarred weapon has earned a reputation for leaving survivors in considerable discomfort. Orks consider this a sign of quality workmanship.\n\n• Levels: 26-35\n• Damage: 20-30\n• Armour penetration: 20%\n• WAAAGH!\n• WAAAAAAAAAAGH!"
+      "Text": "This scarred weapon has earned a reputation for leaving survivors in considerable discomfort. Orks consider this a sign of quality workmanship."
     },
     "choppa-v3-flavor": {
       "Offset": 0,
@@ -42,7 +42,7 @@
     },
     "choppa-v4-description": {
       "Offset": 0,
-      "Text": "Layer upon layer of dried blood, crude repairs and replacement teeth record the Choppa's long service. Its owners stopped counting victories when they ran out of fingers.\n\n• Levels: 36-43\n• Damage: 24-36\n• Armour penetration: 20%\n• WAAAGH!\n• WAAAAAAAAAAGH!"
+      "Text": "Layer upon layer of dried blood, crude repairs and replacement teeth record the Choppa's long service. Its owners stopped counting victories when they ran out of fingers."
     },
     "choppa-v4-flavor": {
       "Offset": 0,
@@ -54,7 +54,7 @@
     },
     "choppa-v5-description": {
       "Offset": 0,
-      "Text": "A brutally oversized edge reinforced with whatever metal its owner could steal. Among Orks, calling a weapon 'dead killy' is both high praise and a warning to keep well clear of it.\n\n• Levels: 44-49\n• Damage: 30-46\n• Armour penetration: 25%\n• WAAAGH!\n• SLAUGHTER"
+      "Text": "A brutally oversized edge reinforced with whatever metal its owner could steal. Among Orks, calling a weapon 'dead killy' is both high praise and a warning to keep well clear of it."
     },
     "choppa-v5-flavor": {
       "Offset": 0,
@@ -66,7 +66,7 @@
     },
     "choppa-v6-description": {
       "Offset": 0,
-      "Text": "Every Ork claims to own the biggest and best Choppa. The bearer of this weapon has settled the argument repeatedly and with considerable finality.\n\n• Levels: 50-55\n• Damage: 38-55\n• Armour penetration: 30%\n• WAAAGH!\n• SLAUGHTER"
+      "Text": "Every Ork claims to own the biggest and best Choppa. The bearer of this weapon has settled the argument repeatedly and with considerable finality."
     },
     "choppa-v6-flavor": {
       "Offset": 0,
@@ -122,7 +122,7 @@
     },
     "big-choppa-v1-description": {
       "Offset": 0,
-      "Text": "A two-handed Ork blade assembled from enough scavenged metal to armour a small vehicle. Its owner chose instead to attach it all to one handle.\n\n• Levels: 1-15\n• Damage: 12-21\n• Armour penetration: 25%\n• BIG SWING!"
+      "Text": "A two-handed Ork blade assembled from enough scavenged metal to armour a small vehicle. Its owner chose instead to attach it all to one handle."
     },
     "big-choppa-v1-flavor": {
       "Offset": 0,
@@ -134,7 +134,7 @@
     },
     "big-choppa-v2-description": {
       "Offset": 0,
-      "Text": "Someone has sharpened this already excessive weapon. The work is uneven, enthusiastic and capable of removing several important things at once.\n\n• Levels: 16-25\n• Damage: 15-26\n• Armour penetration: 25%\n• BIG SWING!"
+      "Text": "Someone has sharpened this already excessive weapon. The work is uneven, enthusiastic and capable of removing several important things at once."
     },
     "big-choppa-v2-flavor": {
       "Offset": 0,
@@ -146,7 +146,7 @@
     },
     "big-choppa-v3-description": {
       "Offset": 0,
-      "Text": "Repeated impacts have bent the blade into a shape its maker insists was intentional. Orks judge the weapon by the size of the dents it leaves behind.\n\n• Levels: 26-35\n• Damage: 21-30\n• Armour penetration: 30%\n• BIG SWING!\n• SPIN TA WIN!"
+      "Text": "Repeated impacts have bent the blade into a shape its maker insists was intentional. Orks judge the weapon by the size of the dents it leaves behind."
     },
     "big-choppa-v3-flavor": {
       "Offset": 0,
@@ -158,7 +158,7 @@
     },
     "big-choppa-v4-description": {
       "Offset": 0,
-      "Text": "This Big Choppa has accumulated extra plates, teeth and weight with every repair. Subtlety was discarded early in the process to make room for more metal.\n\n• Levels: 36-43\n• Damage: 32-45\n• Armour penetration: 30%\n• BIG SWING!\n• SPIN TA WIN!"
+      "Text": "This Big Choppa has accumulated extra plates, teeth and weight with every repair. Subtlety was discarded early in the process to make room for more metal."
     },
     "big-choppa-v4-flavor": {
       "Offset": 0,
@@ -170,7 +170,7 @@
     },
     "big-choppa-v5-description": {
       "Offset": 0,
-      "Text": "A dead killy monument to poor judgement, built too large for sensible warriors and therefore exactly large enough for an ambitious Ork.\n\n• Levels: 44-49\n• Damage: 37-56\n• Armour penetration: 35%\n• BIG SWING!\n• DA BIGGEST BONK!"
+      "Text": "A dead killy monument to poor judgement, built too large for sensible warriors and therefore exactly large enough for an ambitious Ork."
     },
     "big-choppa-v5-flavor": {
       "Offset": 0,
@@ -182,7 +182,7 @@
     },
     "big-choppa-v6-description": {
       "Offset": 0,
-      "Text": "The final answer to the ancient Ork question of how large a Choppa ought to be: larger than its wielder, louder than nearby gunfire and preferably still accelerating.\n\n• Levels: 50-55\n• Damage: 43-64\n• Armour penetration: 40%\n• BIG SWING!\n• DA BIGGEST BONK!"
+      "Text": "The final answer to the ancient Ork question of how large a Choppa ought to be: larger than its wielder, louder than nearby gunfire and preferably still accelerating."
     },
     "big-choppa-v6-flavor": {
       "Offset": 0,
@@ -242,11 +242,239 @@
     },
     "power-klaw-v1-description": {
       "Offset": 0,
-      "Text": "A roaring mechanical claw built from pistons, scavenged armour plate and the Ork conviction that anything worth grabbing is worth crushing.\n\n• Test version V1\n• Damage: 14-24\n• Armour penetration: 30%\n• Original human fist attack animations"
+      "Text": "A roaring mechanical claw built from pistons, scavenged armour plate and the Ork conviction that anything worth grabbing is worth crushing."
     },
     "power-klaw-v1-flavor": {
       "Offset": 0,
       "Text": "'Grab it. Squeeze it. If it stops movin', squeeze da next one.'"
+    },
+    "power-klaw-v2-name": {
+      "Offset": 0,
+      "Text": "Kustom Power Klaw"
+    },
+    "power-klaw-v2-description": {
+      "Offset": 0,
+      "Text": "A roaring mechanical claw built from pistons, scavenged armour plate and the Ork conviction that anything worth grabbing is worth crushing."
+    },
+    "power-klaw-v2-flavor": {
+      "Offset": 0,
+      "Text": "'Da extra piston makes it kustom. Da extra noise makes it better.'"
+    },
+    "power-klaw-v3-name": {
+      "Offset": 0,
+      "Text": "'Urty Power Klaw"
+    },
+    "power-klaw-v3-description": {
+      "Offset": 0,
+      "Text": "A roaring mechanical claw built from pistons, scavenged armour plate and the Ork conviction that anything worth grabbing is worth crushing."
+    },
+    "power-klaw-v3-flavor": {
+      "Offset": 0,
+      "Text": "'Panzer? Dat just means squeeze harder.'"
+    },
+    "power-klaw-v4-name": {
+      "Offset": 0,
+      "Text": "Killy Power Klaw"
+    },
+    "power-klaw-v4-description": {
+      "Offset": 0,
+      "Text": "A roaring mechanical claw built from pistons, scavenged armour plate and the Ork conviction that anything worth grabbing is worth crushing."
+    },
+    "power-klaw-v4-flavor": {
+      "Offset": 0,
+      "Text": "'If da klaw fits, krump it.'"
+    },
+    "power-klaw-v5-name": {
+      "Offset": 0,
+      "Text": "Dead Killy Power Klaw"
+    },
+    "power-klaw-v5-description": {
+      "Offset": 0,
+      "Text": "A roaring mechanical claw built from pistons, scavenged armour plate and the Ork conviction that anything worth grabbing is worth crushing."
+    },
+    "power-klaw-v5-flavor": {
+      "Offset": 0,
+      "Text": "'If you ain't fallin' over, you ain't squeezin' hard enough.'"
+    },
+    "power-klaw-v6-name": {
+      "Offset": 0,
+      "Text": "Da Boss's Klaw"
+    },
+    "power-klaw-v6-description": {
+      "Offset": 0,
+      "Text": "A roaring mechanical claw built from pistons, scavenged armour plate and the Ork conviction that anything worth grabbing is worth crushing."
+    },
+    "power-klaw-v6-flavor": {
+      "Offset": 0,
+      "Text": "'Only da boss gets to press ALL da buttons.'"
+    },
+    "power-klaw-krump-name": {
+      "Offset": 0,
+      "Text": "KRUMP!"
+    },
+    "power-klaw-krump-description": {
+      "Offset": 0,
+      "Text": "Strike one enemy with the Power Klaw for normal weapon damage. Cost: 1 AP."
+    },
+    "power-klaw-sweep-name": {
+      "Offset": 0,
+      "Text": "SWEEP!"
+    },
+    "power-klaw-sweep-description": {
+      "Offset": 0,
+      "Text": "Sweep the Power Klaw through the three tiles directly in front of the wielder for normal weapon damage. Cost: 2 AP."
+    },
+    "power-klaw-push-name": {
+      "Offset": 0,
+      "Text": "GET BACK!"
+    },
+    "power-klaw-push-description": {
+      "Offset": 0,
+      "Text": "Strike one enemy for normal weapon damage. On a hit, push the target 1 cell away without provoking attacks of opportunity. Cost: 2 AP."
+    },
+    "power-klaw-armour-name": {
+      "Offset": 0,
+      "Text": "ARMOUR? WOT ARMOUR?!"
+    },
+    "power-klaw-armour-description": {
+      "Offset": 0,
+      "Text": "Strike one enemy for normal weapon damage. On a hit, both the target and the wielder lose all armour absorption for 2 rounds against all attackers. Deflection, dodge and parry are unchanged. On a miss, neither loses armour. Cost: 2 AP. Cooldown: 3 rounds from use, including on a miss."
+    },
+    "power-klaw-armour-buff-name": {
+      "Offset": 0,
+      "Text": "WOT ARMOUR?!"
+    },
+    "power-klaw-armour-buff-description": {
+      "Offset": 0,
+      "Text": "Armour absorption is capped at 0 for 2 rounds. Deflection, dodge and parry are unchanged."
+    },
+    "power-klaw-squeeze-name": {
+      "Offset": 0,
+      "Text": "DA BIG SQUEEZE!"
+    },
+    "power-klaw-squeeze-description": {
+      "Offset": 0,
+      "Text": "Strike one enemy for 200% weapon damage. After the attack, the wielder is knocked prone for 1 round, even if the attack misses. Cost: 2 AP. Cooldown: 4 rounds from use. Does not automatically knock down the target."
+    },
+    "chain-choppa-v1-name": {
+      "Offset": 0,
+      "Text": "Chain Choppa"
+    },
+    "chain-choppa-v1-description": {
+      "Offset": 0,
+      "Text": "An Ork chainsword whose motor is almost as dangerous as its teeth. Standard strike and cleave remain reliable; its special attacks can kick back, jam or throw the wielder to the ground. Base damage: 8–13. Armour penetration: 20%. Automatically upgrades outside combat at party levels 16, 26, 36, 44 and 50."
+    },
+    "chain-choppa-v1-flavor": {
+      "Offset": 0,
+      "Text": "'Da teef do da work. Mind yer fingers.'"
+    },
+    "chain-choppa-v2-name": {
+      "Offset": 0,
+      "Text": "Kustom Chain Choppa"
+    },
+    "chain-choppa-v2-description": {
+      "Offset": 0,
+      "Text": "An Ork chainsword whose motor is almost as dangerous as its teeth. Standard strike and cleave remain reliable; its special attacks can kick back, jam or throw the wielder to the ground. Base damage: 10–16. Armour penetration: 20%. Automatically upgrades outside combat at party levels 16, 26, 36, 44 and 50."
+    },
+    "chain-choppa-v2-flavor": {
+      "Offset": 0,
+      "Text": "'Mek sez da extra bolts make it safe.'"
+    },
+    "chain-choppa-v3-name": {
+      "Offset": 0,
+      "Text": "'Urty Chain Choppa"
+    },
+    "chain-choppa-v3-description": {
+      "Offset": 0,
+      "Text": "An Ork chainsword whose motor is almost as dangerous as its teeth. Standard strike and cleave remain reliable; its special attacks can kick back, jam or throw the wielder to the ground. Base damage: 18–27. Armour penetration: 25%. Automatically upgrades outside combat at party levels 16, 26, 36, 44 and 50."
+    },
+    "chain-choppa-v3-flavor": {
+      "Offset": 0,
+      "Text": "'If it gets stuck, pull harder!'"
+    },
+    "chain-choppa-v4-name": {
+      "Offset": 0,
+      "Text": "Killy Chain Choppa"
+    },
+    "chain-choppa-v4-description": {
+      "Offset": 0,
+      "Text": "An Ork chainsword whose motor is almost as dangerous as its teeth. Standard strike and cleave remain reliable; its special attacks can kick back, jam or throw the wielder to the ground. Base damage: 22–33. Armour penetration: 25%. Automatically upgrades outside combat at party levels 16, 26, 36, 44 and 50."
+    },
+    "chain-choppa-v4-flavor": {
+      "Offset": 0,
+      "Text": "'It ain't broken. It'z finkin'.'"
+    },
+    "chain-choppa-v5-name": {
+      "Offset": 0,
+      "Text": "Dead Killy Chain Choppa"
+    },
+    "chain-choppa-v5-description": {
+      "Offset": 0,
+      "Text": "An Ork chainsword whose motor is almost as dangerous as its teeth. Standard strike and cleave remain reliable; its special attacks can kick back, jam or throw the wielder to the ground. Base damage: 27–41. Armour penetration: 30%. Automatically upgrades outside combat at party levels 16, 26, 36, 44 and 50."
+    },
+    "chain-choppa-v5-flavor": {
+      "Offset": 0,
+      "Text": "'Red button? Wot red button?'"
+    },
+    "chain-choppa-v6-name": {
+      "Offset": 0,
+      "Text": "Da Loudest Choppa"
+    },
+    "chain-choppa-v6-description": {
+      "Offset": 0,
+      "Text": "An Ork chainsword whose motor is almost as dangerous as its teeth. Standard strike and cleave remain reliable; its special attacks can kick back, jam or throw the wielder to the ground. Base damage: 34–50. Armour penetration: 35%. Automatically upgrades outside combat at party levels 16, 26, 36, 44 and 50."
+    },
+    "chain-choppa-v6-flavor": {
+      "Offset": 0,
+      "Text": "'If ya can still hear it, it ain't loud enough!'"
+    },
+    "chain-chain-name": {
+      "Offset": 0,
+      "Text": "CHAAAAAAAAAAIN!"
+    },
+    "chain-chain-description": {
+      "Offset": 0,
+      "Text": "Overrev the motor for an attack with 150% weapon damage with normal character modifiers. Before the attack, there is a 20% chance of kickback: instead of attacking the target, deal half your tier's base weapon damage to yourself. Self-damage cannot critically hit, gains no offensive damage bonuses and is reduced by your defences. Cost: 2 AP. Cooldown: 2 rounds from use, including kickback and misses."
+    },
+    "chain-bite-name": {
+      "Offset": 0,
+      "Text": "DON'T LET GO!"
+    },
+    "chain-bite-description": {
+      "Offset": 0,
+      "Text": "Make a normal attack. On a hit, attempt up to three additional attacks against the same target, each with 35% weapon damage with normal character modifiers. A miss ends the sequence. After each successful additional hit there is a 25% chance the chain jams: the sequence ends and you cannot parry for 1 round. Cost: 2 AP for the whole sequence. Cooldown: 3 rounds from use, including misses."
+    },
+    "chain-red-name": {
+      "Offset": 0,
+      "Text": "DA BUTTON WUZ RED!"
+    },
+    "chain-red-description": {
+      "Offset": 0,
+      "Text": "Make a reckless circular attack with 150% weapon damage with normal character modifiers against everyone within 1 cell, including allies but excluding yourself. Then roll once: equal chances of no mishap, a jammed motor for 1 round, or being knocked prone for 1 round. A jammed motor blocks all three Chain Choppa special abilities; normal strike and cleave remain usable. Cost: 3 AP. Cooldown: 4 rounds from use."
+    },
+    "chain-jam-name": {
+      "Offset": 0,
+      "Text": "DA MOTOR'S DED!"
+    },
+    "chain-jam-description": {
+      "Offset": 0,
+      "Text": "The motor is jammed for 1 round. CHAAAAAAAAAAIN!, DON'T LET GO! and DA BUTTON WUZ RED! cannot be used. Normal strike and cleave remain available."
+    },
+    "chain-no-parry-name": {
+      "Offset": 0,
+      "Text": "CHAIN'S STUCK!"
+    },
+    "chain-no-parry-description": {
+      "Offset": 0,
+      "Text": "The chain has caught and the follow-up sequence ended. You cannot parry for 1 round."
+    },
+    "ork-cache-name": {
+      "Offset": 0,
+      "Text": "DA LOOT BOX"
+    },
+    "ork-cache-description": {
+      "Offset": 0,
+      "Text": "A battered cache of Ork weapons. Four ways to make a proper mess. No refunds."
     }
   }
 }

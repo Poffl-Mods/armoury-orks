@@ -4,11 +4,14 @@
     "$type": "c00f723cccf2d314198c42a572c631fd, BlueprintItemWeapon",
     "PrototypeLink": "b61740707f6b477f9ed139b22a81d245",
     "m_Overrides": [
+      "Components",
       "m_DisplayName",
       "m_Description",
       "m_FlavorText",
       "m_Icon",
       "m_VisualParameters.m_WeaponModel",
+      "m_VisualParameters.m_WeaponBeltModelOverride",
+      "m_VisualParameters.m_WeaponSheathModelOverride",
       "m_VisualParameters.m_WeaponAnimationStyle",
       "Family",
       "Classification",
@@ -80,7 +83,7 @@
       "Shared": null
     },
     "m_Icon": {
-      "guid": "dc6c9d334c722964d9c668867857a87a",
+      "guid": "6b55ad069bad41bbb7f6a955e77bde9a",
       "fileid": 21300000
     },
     "m_FlavorText": {
@@ -129,11 +132,17 @@
       "m_SpecialAnimation": "None",
       "m_BurstAnimationDelay": 0.0,
       "m_WeaponModel": {
-        "guid": "7226959f766810a4383c386673b21bde",
-        "fileid": 978755509708091359
+        "guid": "ad3a247196266497bb4d7e2e83e92d68",
+        "fileid": 1493321101088019191
       },
-      "m_WeaponBeltModelOverride": null,
-      "m_WeaponSheathModelOverride": null,
+      "m_WeaponBeltModelOverride": {
+        "guid": "d07323c1b4ece4e78995a1a5691939c1",
+        "fileid": 11675993111930527
+      },
+      "m_WeaponSheathModelOverride": {
+        "guid": "d07323c1b4ece4e78995a1a5691939c1",
+        "fileid": 11675993111930527
+      },
       "m_SoundSize": "None",
       "m_SoundType": "None",
       "m_SoundSizeSwitch": {
@@ -161,7 +170,7 @@
       "Ability1": {
         "Type": "SingleShot",
         "Mode": "Default",
-        "m_Ability": "!bp_be721a48e3614ddbb86bf18503511c2c",
+        "m_Ability": "!bp_b155ee1863864b3d9ad0adcf8584e591",
         "m_FXSettings": null,
         "OnHitOverrideType": "None",
         "m_OnHitActions": null,
@@ -170,20 +179,20 @@
       "Ability2": {
         "Type": "AOE",
         "Mode": "Default",
-        "m_Ability": "!bp_a7412fd693214091aa88c7beb83ac108",
+        "m_Ability": "!bp_8f6642c9cd7a42a7946075203f3e2381",
         "m_FXSettings": "!bp_5a72a93ee3bd4a049aa4ddef1e4c7f84",
         "OnHitOverrideType": "None",
         "m_OnHitActions": null,
         "AP": 2
       },
       "Ability3": {
-        "Type": "None",
+        "Type": "SingleShot",
         "Mode": "Default",
-        "m_Ability": null,
+        "m_Ability": "!bp_639cde5c2c32442cbac5d472cc790e38",
         "m_FXSettings": null,
         "OnHitOverrideType": "None",
         "m_OnHitActions": null,
-        "AP": 0
+        "AP": 2
       },
       "Ability4": {
         "Type": "None",
@@ -204,7 +213,7 @@
         "AP": 0
       }
     },
-    "m_AttackOfOpportunityAbility": "!bp_be721a48e3614ddbb86bf18503511c2c",
+    "m_AttackOfOpportunityAbility": "!bp_b155ee1863864b3d9ad0adcf8584e591",
     "m_AttackOfOpportunityAbilityFXSettings": "!bp_612936da5a8948ccab3ac067e5d45144",
     "Category": "Melee",
     "Family": "Primitive",
@@ -235,8 +244,8 @@
       "Shared": null
     },
     "IsTwoHanded": false,
-    "WarhammerDamage": 14,
-    "WarhammerMaxDamage": 24,
+    "WarhammerDamage": 8,
+    "WarhammerMaxDamage": 13,
     "WarhammerPenetration": 30,
     "DodgePenetration": 0,
     "AdditionalHitChance": 0,

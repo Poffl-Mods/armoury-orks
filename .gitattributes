@@ -1,0 +1,9 @@
+# Unity writes blank serialized values with a space after the colon.
+*.meta whitespace=-blank-at-eol
+*.prefab whitespace=-blank-at-eol
+*.mat whitespace=-blank-at-eol
+*.asset whitespace=-blank-at-eol
+
+*.fbx binary
+*.blend binary
+*.png binary

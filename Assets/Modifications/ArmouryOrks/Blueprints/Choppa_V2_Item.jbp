@@ -121,8 +121,8 @@
       "m_SpecialAnimation": "None",
       "m_BurstAnimationDelay": 0.0,
       "m_WeaponModel": {
-        "guid": "1d141e9da31d6954780521d8712d6a37",
-        "fileid": 4522092532161450281
+        "guid": "c9b3a4774c9a54b9ebd12c2014c6e7ad",
+        "fileid": 106620583306962065
       },
       "m_WeaponBeltModelOverride": null,
       "m_WeaponSheathModelOverride": null,

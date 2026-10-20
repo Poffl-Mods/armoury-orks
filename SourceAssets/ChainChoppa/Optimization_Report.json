@@ -1,0 +1,19 @@
+{
+  "original_triangles": 912580,
+  "optimized_triangles": 25000,
+  "optimized_vertices": 12400,
+  "reduction_percent": 97.26051414670495,
+  "uv_layers": [
+    "UVMap"
+  ],
+  "original_dimensions": [
+    0.4896249771118164,
+    0.24263408780097961,
+    1.9059690237045288
+  ],
+  "surface_deviation_sample": "optimized face centers to original surface; object space units",
+  "median_deviation": 0.00024051785294432193,
+  "p95_deviation": 0.0007396524888463318,
+  "max_deviation": 0.0019724268931895494,
+  "normal_map": "2048x2048 tangent-space normals baked from original high resolution geometry and source normal material onto reduced mesh; 8px margin"
+}

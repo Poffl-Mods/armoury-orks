@@ -14,9 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Manifest:
     UniqueName: ArmouryOrks
-    Version: 0.4.15
+    Version: 1.0.0
     DisplayName: 'Armoury: Orks! WAAAAAGH!'
-    Description: Ork weapons for player use, beginning with the Choppa.
+    Description: Four Ork weapon families with six progressing tiers, unique abilities
+      and an armoury cache aboard the voidship.
     Author: Poffl
     Repository: https://github.com/Poffl-Mods/armoury-orks
     HomePage: https://github.com/Poffl-Mods/armoury-orks

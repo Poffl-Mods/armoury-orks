@@ -216,7 +216,7 @@
     "m_AttackOfOpportunityAbility": "!bp_b155ee1863864b3d9ad0adcf8584e591",
     "m_AttackOfOpportunityAbilityFXSettings": "!bp_612936da5a8948ccab3ac067e5d45144",
     "Category": "Melee",
-    "Family": "Primitive",
+    "Family": "Power",
     "Classification": "None",
     "m_HoldingType": "OneHanded",
     "m_Range": "Melee",

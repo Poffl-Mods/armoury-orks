@@ -177,7 +177,7 @@ class PowerKlawContract(unittest.TestCase):
     def test_package_contains_current_assets_and_runtime(self):
         with zipfile.ZipFile(os.environ['ORK_MOD_ZIP']) as z:
             self.assertIsNone(z.testzip())
-            self.assertEqual(json.loads(z.read('OwlcatModificationManifest.json'))['Version'], '1.0.0')
+            self.assertEqual(json.loads(z.read('OwlcatModificationManifest.json'))['Version'], os.environ.get('ORK_MOD_VERSION', '1.0.1'))
             runtime = z.read('Assemblies/ArmouryOrks.Runtime.dll')
             self.assertGreater(len(runtime), 1000)
             for tier in range(1, 7):

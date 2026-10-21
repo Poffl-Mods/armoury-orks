@@ -4,6 +4,7 @@
     "$type": "c00f723cccf2d314198c42a572c631fd, BlueprintItemWeapon",
     "PrototypeLink": "b61740707f6b477f9ed139b22a81d245",
     "m_Overrides": [
+      "Family",
       "Components",
       "m_Icon",
       "m_VisualParameters.m_WeaponModel",
@@ -164,7 +165,7 @@
     "m_AttackOfOpportunityAbility": "!bp_be721a48e3614ddbb86bf18503511c2c",
     "m_AttackOfOpportunityAbilityFXSettings": "!bp_612936da5a8948ccab3ac067e5d45144",
     "Category": "Melee",
-    "Family": "Primitive",
+    "Family": "Power",
     "Classification": "None",
     "m_HoldingType": "OneHanded",
     "m_Range": "Melee",

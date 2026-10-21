@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.1 — 2026-10-21
+
+- Classified all Power Klaw tiers and the internal DA BIG SQUEEZE! weapons as Power weapons so Power Weapon Specialization applies. Power classification confirmed in-game on macOS by the user.
+
 ## 1.0.0 — 2026-10-20
 
 - Use consistent Ork War Chest names for authoring folders, reference files, internal scene objects and source metadata. Saved blueprint and prefab identities are unchanged.

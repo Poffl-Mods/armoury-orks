@@ -201,7 +201,12 @@ class ChainChoppaTests(unittest.TestCase):
         with zipfile.ZipFile(ROOT / 'Releases/ArmouryOrks-0.5.8.zip') as previous:
             for name in previous.namelist():
                 if name.startswith('Blueprints/') and name.endswith('.jbp') and 'ChainChoppa' not in name:
-                    self.assertEqual(json.loads(previous.read(name)), json.loads((BLUEPRINTS / Path(name).name).read_text()), name)
+                    expected = json.loads(previous.read(name))
+                    if Path(name).name.startswith('PowerKlaw_') and name.endswith('_Item.jbp'):
+                        expected['Data']['Family'] = 'Power'
+                        if 'HiddenSqueeze' in name:
+                            expected['Data']['m_Overrides'].insert(0, 'Family')
+                    self.assertEqual(expected, json.loads((BLUEPRINTS / Path(name).name).read_text()), name)
             old = json.loads(previous.read('Blueprints/ChainChoppa_Item.jbp'))['Data']['m_VisualParameters']
             for tier in range(1, 7):
                 self.assertEqual(item(tier)['Data']['m_VisualParameters'], old)

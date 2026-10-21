@@ -44,8 +44,12 @@ class ArmouryCacheTests(unittest.TestCase):
             previous = [name for name in archive.namelist() if name.startswith('Blueprints/') and name.endswith('.jbp')]
             self.assertGreater(len(previous), 100)
             for name in previous:
-                self.assertEqual(json.loads(archive.read(name)),
-                                 json.loads((MOD / 'Blueprints' / Path(name).name).read_text()), name)
+                expected = json.loads(archive.read(name))
+                if Path(name).name.startswith('PowerKlaw_') and name.endswith('_Item.jbp'):
+                    expected['Data']['Family'] = 'Power'
+                    if 'HiddenSqueeze' in name:
+                        expected['Data']['m_Overrides'].insert(0, 'Family')
+                self.assertEqual(expected, json.loads((MOD / 'Blueprints' / Path(name).name).read_text()), name)
 
     @unittest.skipUnless((ROOT / "Releases/ArmouryOrks-0.7.1.zip").exists(), "Historical package unavailable")
     def test_replacement_preserves_saved_cache_blueprint(self):

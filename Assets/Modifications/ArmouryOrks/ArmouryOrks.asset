@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Manifest:
     UniqueName: ArmouryOrks
-    Version: 1.0.1
+    Version: 1.0.2
     DisplayName: 'Armoury: Orks! WAAAAAGH!'
     Description: Four Ork weapon families with six progressing tiers, unique abilities
       and an armoury cache aboard the voidship.

@@ -2,7 +2,7 @@
 
 Custom Ork weapons for *Warhammer 40,000: Rogue Trader*.
 
-## Version 1.0.0
+## Version 1.0.2
 
 Four brutal weapon families, each with six tiers that automatically upgrade as your party levels:
 
@@ -13,14 +13,16 @@ Four brutal weapon families, each with six tiers that automatically upgrade as y
 
 Find one of each in **DA LOOT BOX**, an Ork chest in the **Warrant Chamber** aboard your voidship. Works with existing campaigns. The chest does not refill after looting. ToyBox and Adeptus Custodes are not required.
 
-[Download v1.0.0 from GitHub Releases](https://github.com/Poffl-Mods/armoury-orks/releases/tag/v1.0.0). Tested in-game on Windows and macOS.
+[Download v1.0.2 from GitHub Releases](https://github.com/Poffl-Mods/armoury-orks/releases/tag/v1.0.2). Earlier releases were tested in-game on Windows and macOS. The new upgrade recovery paths have automated coverage; in-game verification remains pending.
+
+Version 1.0.2 makes automatic weapon upgrades safer and limits upgrades to player and companion inventories. Weapon stats, abilities and level thresholds are unchanged.
 
 ## Installation
 
 Requires [MicroPatches](https://github.com/microsoftenator2022/MicroPatches/releases).
 
-- **Mac:** Install `ArmouryOrks-1.0.0-macOS.zip` with **Mac ModInstaller**.
-- **Windows:** Install `ArmouryOrks-1.0.0-Windows.zip` with **Modfinder**.
+- **Mac:** Install `ArmouryOrks-1.0.2-macOS.zip` with **Mac ModInstaller**.
+- **Windows:** Install `ArmouryOrks-1.0.2-Windows.zip` with **Modfinder**.
 
 Enable the mod and restart the game.
 

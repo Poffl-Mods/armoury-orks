@@ -1,5 +1,13 @@
 # Changelog
 
+## 1.0.2 — 2026-10-22
+
+- Deliver and verify upgraded weapons before extracting the originals; check equipment insertion and clean up failed replacements. Stop further upgrades if recovery itself fails.
+- Discover current player, stash and companion inventories explicitly instead of retaining collections from global events. Exclude vendors and unrelated inventories, deduplicate scans and recheck ownership after callbacks.
+- Preserve weapon stats, abilities, progression thresholds, blueprint identities and save formats.
+- Match generated hidden Power Klaw override ordering to source without changing weapon values or weakening package checks.
+- Add installed-game API compilation and focused upgrade failure-path coverage. Build and validate separate macOS and Windows packages; actual game/save/load testing of the new recovery paths remains pending.
+
 ## 1.0.1 — 2026-10-21
 
 - Classified all Power Klaw tiers and the internal DA BIG SQUEEZE! weapons as Power weapons so Power Weapon Specialization applies. Power classification confirmed in-game on macOS by the user.

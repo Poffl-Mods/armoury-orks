@@ -166,10 +166,10 @@ namespace ArmouryOrks.Editor
         // Vanilla one-handed primitive axe; uses the BrutalOneHanded animation style.
         private const string WeaponPrototype = "b61740707f6b477f9ed139b22a81d245";
 
-        [MenuItem("Armoury Orks/Build 1.0.1 macOS")]
+        [MenuItem("Armoury Orks/Build 1.0.2 macOS")]
         public static void Build() => BuildForPlatform(BuildTarget.StandaloneOSX);
 
-        [MenuItem("Armoury Orks/Build 1.0.1 Windows")]
+        [MenuItem("Armoury Orks/Build 1.0.2 Windows")]
         public static void BuildWindows() => BuildForPlatform(BuildTarget.StandaloneWindows64);
 
         private static void BuildForPlatform(BuildTarget target)
@@ -180,7 +180,7 @@ namespace ArmouryOrks.Editor
             ValidateChainCombatContracts();
             Modification mod = AssetDatabase.LoadAssetAtPath<Modification>(Root + "/ArmouryOrks.asset");
             if (mod == null) throw new InvalidOperationException("ArmouryOrks Modification asset was not found.");
-            mod.Manifest.Version = "1.0.1";
+            mod.Manifest.Version = "1.0.2";
             EditorUtility.SetDirty(mod);
             AssetDatabase.SaveAssets();
             var result = Builder.Build(mod);
@@ -802,13 +802,13 @@ namespace ArmouryOrks.Editor
             {
                 string weaponGuid = KlawSqueezeWeaponGuids[i - 4];
                 JObject hidden = PrepareClone(Load(WeaponPrototype), weaponGuid, WeaponPrototype);
+                Override(hidden, "Family", "Power");
                 Override(hidden, "Components", new JArray());
                 Override(hidden, "m_Icon", UnityReference(iconGuid, iconFileId));
                 hidden["Data"]["m_VisualParameters"]["m_WeaponModel"] = null;
                 hidden["Data"]["m_VisualParameters"]["m_WeaponAnimationStyle"] = "Fist";
                 AddOverride(hidden, "m_VisualParameters.m_WeaponModel");
                 AddOverride(hidden, "m_VisualParameters.m_WeaponAnimationStyle");
-                Override(hidden, "Family", "Power");
                 Override(hidden, "Classification", "None");
                 Override(hidden, "WarhammerDamage", PowerKlawDamageMin[i] * 2);
                 Override(hidden, "WarhammerMaxDamage", PowerKlawDamageMax[i] * 2);

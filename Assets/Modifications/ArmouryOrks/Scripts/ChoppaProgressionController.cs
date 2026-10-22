@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -52,7 +51,7 @@ namespace ArmouryOrks.Runtime
             "SubscribeGlobal", BindingFlags.Static | BindingFlags.NonPublic);
         private static readonly MethodInfo UnsubscribeGlobalMethod = typeof(EventBus).GetMethod(
             "UnsubscribeGlobal", BindingFlags.Static | BindingFlags.NonPublic);
-        private readonly HashSet<ItemsCollection> m_KnownCollections = new HashSet<ItemsCollection>();
+        private bool m_RecoveryFailed;
         private float m_NextCheck;
         private bool m_ChangingItems;
         private bool m_DeferredByCombat;
@@ -73,7 +72,6 @@ namespace ArmouryOrks.Runtime
         {
             if (Time.unscaledTime < m_NextCheck) return;
             m_NextCheck = Time.unscaledTime + 1f;
-            RememberPlayerCollections();
             TryUpgradeAll();
         }
 
@@ -81,32 +79,21 @@ namespace ArmouryOrks.Runtime
 
         public void HandleItemsAdded(ItemsCollection collection, ItemEntity item, int count)
         {
-            if (collection != null) m_KnownCollections.Add(collection);
+            // Global events also include vendors and loot. Discover ownership afresh instead.
             if (!m_ChangingItems) TryUpgradeAll();
         }
 
-        public void HandleItemsRemoved(ItemsCollection collection, ItemEntity item, int count)
-        {
-            if (collection != null) m_KnownCollections.Add(collection);
-        }
+        public void HandleItemsRemoved(ItemsCollection collection, ItemEntity item, int count) { }
 
         public void HandlePartyCombatStateChanged(bool inCombat)
         {
             if (!inCombat && m_DeferredByCombat) TryUpgradeAll();
         }
 
-        private void RememberPlayerCollections()
-        {
-            Player player = Game.Instance?.Player;
-            if (player == null) return;
-            if (player.Inventory != null) m_KnownCollections.Add(player.Inventory);
-            if (player.SharedStash != null) m_KnownCollections.Add(player.SharedStash);
-        }
-
         private void TryUpgradeAll()
         {
             Player player = Game.Instance?.Player;
-            if (player == null || m_ChangingItems) return;
+            if (player == null || m_ChangingItems || m_RecoveryFailed) return;
             if (IsCombatActive(player))
             {
                 m_DeferredByCombat = true;
@@ -118,18 +105,26 @@ namespace ArmouryOrks.Runtime
             m_ChangingItems = true;
             try
             {
-                foreach (ItemsCollection collection in m_KnownCollections.Where(value => value != null).ToArray())
-                foreach (ItemEntity item in collection.Items.ToArray())
-                    TryUpgradeItem(item, targetTier);
+                BaseUnitEntity[] units = EnumeratePartyUnits(player).ToArray();
+                var collections = new HashSet<ItemsCollection> { player.Inventory, player.SharedStash };
+                foreach (BaseUnitEntity unit in units)
+                    if (unit.Inventory?.Collection != null) collections.Add(unit.Inventory.Collection);
 
-                foreach (BaseUnitEntity unit in EnumeratePartyUnits(player))
+                var items = new HashSet<ItemEntity>();
+                foreach (ItemsCollection collection in collections.Where(value => value != null && !value.IsVendorTable))
+                    foreach (ItemEntity item in collection.Items.ToArray()) items.Add(item);
+                foreach (BaseUnitEntity unit in units)
+                    foreach (ItemEntity item in unit.Body.Items.ToArray()) items.Add(item);
+
+                foreach (ItemEntity item in items)
                 {
-                    if (unit.Inventory?.Collection != null) m_KnownCollections.Add(unit.Inventory.Collection);
-                    PropertyInfo bodyProperty = unit.GetType().GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic)
-                        .FirstOrDefault(property => typeof(PartUnitBody).IsAssignableFrom(property.PropertyType));
-                    if (bodyProperty?.GetValue(unit) is PartUnitBody body)
-                    foreach (ItemEntity item in body.Items.ToArray())
-                        TryUpgradeItem(item, targetTier);
+                    if (m_RecoveryFailed) break;
+                    var slot = item?.HoldingSlot;
+                    // Revalidate snapshots: callbacks may have moved or removed an item.
+                    if (slot != null && !units.Any(unit => ReferenceEquals(unit, slot.Owner))) continue;
+                    ItemsCollection collection = item?.Collection ?? slot?.MaybeOwnerInventory?.Collection;
+                    if (collection == null || !collections.Contains(collection) || collection.IsVendorTable) continue;
+                    TryUpgradeItem(item, targetTier);
                 }
             }
             finally { m_ChangingItems = false; }
@@ -137,27 +132,9 @@ namespace ArmouryOrks.Runtime
 
         private static IEnumerable<BaseUnitEntity> EnumeratePartyUnits(Player player)
         {
-            var result = new HashSet<BaseUnitEntity>();
-            const BindingFlags flags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
-            foreach (PropertyInfo property in player.GetType().GetProperties(flags)
-                .Where(property => property.Name.IndexOf("Party", StringComparison.OrdinalIgnoreCase) >= 0 && property.GetIndexParameters().Length == 0))
-            {
-                object value;
-                try { value = property.GetValue(player); } catch { continue; }
-                AddUnits(value, result);
-            }
-            foreach (FieldInfo field in player.GetType().GetFields(flags)
-                .Where(field => field.Name.IndexOf("Party", StringComparison.OrdinalIgnoreCase) >= 0))
-                AddUnits(field.GetValue(player), result);
-            return result;
-        }
-
-        private static void AddUnits(object value, HashSet<BaseUnitEntity> result)
-        {
-            if (value is BaseUnitEntity unit) result.Add(unit);
-            else if (value is IEnumerable enumerable)
-            foreach (object item in enumerable)
-                if (item is BaseUnitEntity partyUnit) result.Add(partyUnit);
+            // Explicit game-owned rosters; never infer ownership from member names.
+            return player.PartyAndPets.Concat(player.PartyAndPetsDetached)
+                .Concat(player.RemoteCompanions).Where(unit => unit != null).Distinct();
         }
 
         private static bool IsCombatActive(Player player) => player.IsInCombat ||
@@ -187,12 +164,87 @@ namespace ArmouryOrks.Runtime
 
             var slot = item.HoldingSlot;
             ItemsCollection collection = item.Collection ?? slot?.MaybeOwnerInventory?.Collection;
-            if (collection == null) return;
-            if (slot != null && !slot.RemoveItem(false, false)) return;
-            if (item.Collection != null) item.Collection.Remove(item);
-            ItemEntity replacement = collection.Add(target);
-            if (slot != null) slot.InsertItem(replacement, false);
-            Debug.Log($"[ArmouryOrks] {weaponName} upgraded from V{currentTier + 1} to V{targetTier + 1} at party level {Game.Instance.Player.PartyLevel}.");
+            // Equipped items remain in their owner's collection. Reject detached/stale
+            // references and unusual stacks rather than creating one replacement for many.
+            if (collection == null || !ReferenceEquals(item.Collection, collection) ||
+                !collection.Items.Contains(item) || item.Count != 1 ||
+                (slot != null && (!ReferenceEquals(slot.MaybeItem, item) ||
+                    !ReferenceEquals(slot.MaybeOwnerInventory?.Collection, collection)))) return;
+
+            ItemEntity replacement = null;
+            bool committed = false;
+            try
+            {
+                replacement = ItemsEntityFactory.CreateEntity(target);
+                if (replacement == null) return;
+                if (replacement.IsStackable || replacement.Count != 1) return;
+                if (slot != null && (!slot.CanRemoveItem() || !slot.CanInsertItem(replacement))) return;
+
+                // Keep a reference before Add: event handlers can throw after insertion.
+                // noAutoMerge preserves this exact entity for verification and cleanup.
+                if (!ReferenceEquals(collection.Add(replacement, true), replacement) ||
+                    !ReferenceEquals(replacement.Collection, collection) ||
+                    !collection.Items.Contains(replacement))
+                    throw new InvalidOperationException("Replacement was not delivered to the original inventory.");
+
+                if (!ReferenceEquals(item.Collection, collection) || !collection.Items.Contains(item) ||
+                    !ReferenceEquals(item.HoldingSlot, slot) ||
+                    (slot != null && !ReferenceEquals(slot.MaybeItem, item)))
+                    throw new InvalidOperationException("Original weapon moved during replacement delivery.");
+
+                if (slot != null)
+                {
+                    if (!slot.RemoveItem(false, false)) return;
+                    slot.InsertItem(replacement, false);
+                    // InsertItem returns void and can silently refuse insertion.
+                    if (!ReferenceEquals(slot.MaybeItem, replacement) ||
+                        !ReferenceEquals(replacement.HoldingSlot, slot)) return;
+                }
+
+                // Delivery is verified before extraction. Remove detaches; it does not
+                // dispose the original, so retain it until the operation has completed.
+                if (!ReferenceEquals(item.Collection, collection) || !collection.Items.Contains(item) ||
+                    item.HoldingSlot != null)
+                    throw new InvalidOperationException("Original weapon moved before extraction.");
+                try { collection.Remove(item); }
+                finally
+                {
+                    committed = item.Collection == null && item.HoldingSlot == null &&
+                        !collection.Items.Contains(item);
+                }
+                if (!committed) throw new InvalidOperationException("Original weapon was not extracted.");
+                Debug.Log($"[ArmouryOrks] {weaponName} upgraded from V{currentTier + 1} to V{targetTier + 1} at party level {Game.Instance.Player.PartyLevel}.");
+            }
+            catch (Exception exception)
+            {
+                Debug.LogError("[ArmouryOrks] Weapon upgrade failed: " + exception);
+            }
+            finally
+            {
+                if (!committed && replacement != null)
+                {
+                    try
+                    {
+                        if (replacement.HoldingSlot != null &&
+                            !replacement.HoldingSlot.RemoveItem(false, false))
+                            throw new InvalidOperationException("Could not unequip failed replacement.");
+                        if (replacement.Collection != null) replacement.Collection.Remove(replacement);
+                        if (replacement.Collection != null || collection.Items.Contains(replacement))
+                            throw new InvalidOperationException("Could not extract failed replacement.");
+                        replacement.Dispose();
+                        if (slot != null && slot.MaybeItem == null && item.HoldingSlot == null &&
+                            ReferenceEquals(item.Collection, collection) && collection.Items.Contains(item))
+                            slot.InsertItem(item, false);
+                        // If restoration is refused, the original remains in its inventory.
+                    }
+                    catch (Exception exception)
+                    {
+                        // Do not produce more replacements when recovery itself failed.
+                        m_RecoveryFailed = true;
+                        Debug.LogError("[ArmouryOrks] Upgrade recovery failed; progression stopped for this session: " + exception);
+                    }
+                }
+            }
         }
 
         private static int TierForLevel(int level)
